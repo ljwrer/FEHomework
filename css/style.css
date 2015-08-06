@@ -1,0 +1,150 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* css reset finish */
+.g-tip{
+	width: 100%;
+	height: 36px;
+	background: #f3f3f3;
+	overflow: hidden;
+}
+.m-tip{
+	width: 1205px;
+	/*max-width: 1205px;*/
+	margin: 0 auto;
+	font: 12px/36px "microsoft yahei";
+	color: #333333;
+}
+.m-tip a{
+	margin-left: 12px;
+	text-decoration: none;
+	color: #21a557;
+}
+.m-tip a:hover{
+	text-decoration: underline;
+}
+.m-tip p,.m-tip span{
+	display: inline-block;
+}
+.m-tip .u-notip{
+	display: inline-block;
+	float: right;
+	margin-right: 2px;
+	line-height: 36px;
+	cursor: pointer;
+}
+.m-tip .u-sprite{
+	margin-top: 1px;
+	background: url(../img/sprite.png) no-repeat;
+	width: 9px;
+	height: 9px;
+}
+.m-tip span{
+	margin-left: 6px;
+	width: 48px;
+}
+@media only screen and (min-width: 0px) and (max-width: 1204px) {
+	.m-tip .m-tip{
+		width: 980px;
+		/*max-width: 980px;*/
+	}
+}
+.g-head{
+	width: 100%;
+	height: 89px;
+	overflow: hidden;
+}
+.m-head{
+	width: 1205px;
+	margin: 0 auto;
+	/*background: deepskyblue;*/
+	height: 100%;
+	
+}
+.m-head .m-logo{
+	display: inline-block;
+	/*margin-left: 1px;
+	margin-top: 30px;
+	margin-right: 31px;*/
+	width: 234px;
+	height: 22px;
+}
+.m-head .m-logo1{
+	font:28px/89px "gill sans mt" bold;
+	color: green;
+	padding-right: 10px;
+	border-right: 1px solid #39a030;
+}
+.m-head .m-logo{
+	font: 22px "Hiragino Sans GB";
+}
+.m-head .m-follow{
+	display: inline-block;
+}
+.m-head .u-follow-btn{
+	width: 54px;
+	height: 21px;
+	background-color:#21a557;
+	border-radius: 2px;
+}
+.m-head .m-follow .u-sprite{
+	background: url(../img/sprite.png) 125px 0px no-repeat;
+	width: 8px;
+	height: 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
