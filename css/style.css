@@ -47,6 +47,18 @@ table {
 	border-spacing: 0;
 }
 /* css reset finish */
+.clear-fix:after{
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.clear-fix{
+	zoom: 1;
+}
+
 .g-tip{
 	width: 100%;
 	height: 36px;
@@ -89,7 +101,7 @@ table {
 	width: 48px;
 }
 @media only screen and (min-width: 0px) and (max-width: 1204px) {
-	.m-tip .m-tip{
+	.m-tip{
 		width: 980px;
 		/*max-width: 980px;*/
 	}
@@ -102,45 +114,171 @@ table {
 .m-head{
 	width: 1205px;
 	margin: 0 auto;
-	/*background: deepskyblue;*/
 	height: 100%;
-	
 }
 .m-head .m-logo{
-	display: inline-block;
-	/*margin-left: 1px;
-	margin-top: 30px;
-	margin-right: 31px;*/
-	width: 234px;
-	height: 22px;
+	float: left;
+	margin-right: 30px;
 }
-.m-head .m-logo1{
-	font:28px/89px "gill sans mt" bold;
-	color: green;
+.m-head .logo1{
 	padding-right: 10px;
 	border-right: 1px solid #39a030;
+	font:28px/89px "gill sans mt" bold;
+	color: green;
 }
-.m-head .m-logo{
-	font: 22px "Hiragino Sans GB";
+.m-head .logo2{
+	font: 22px/89px "Hiragino Sans GB";
+	color: #333333;
 }
+
 .m-head .m-follow{
-	display: inline-block;
+	float: left;
 }
 .m-head .u-follow-btn{
+	float: left;
+	margin-top: 34px;
+	margin-right: 14px;
 	width: 54px;
 	height: 21px;
 	background-color:#21a557;
-	border-radius: 2px;
+	border-radius: 1px;
 }
-.m-head .m-follow .u-sprite{
-	background: url(../img/sprite.png) 125px 0px no-repeat;
+.m-head .u-follow-btn .u-sprite{
+	float: left;
+	margin: 7px 5px 6px 9px;
+	background: url(../img/sprite.png) -125px 0px no-repeat;
 	width: 8px;
 	height: 8px;
 }
+.m-head .u-follow-btn .u-follow{
+	font:12px/21px simsun;
+	color: white;
+}
+.m-head .m-follow .fans{
+	font:12px/89px simsun;
+	color: #666666;
+}
 
+.m-head .u-unfollow-btn{
+	float: left;
+	margin-top: 34px;
+	margin-right: 14px;
+	width: 104px;
+	height: 19px;
+	background-color:#f8f8f8;
+	border: 1px solid #efefef;
+	border-radius: 1px;	
+}
+.m-head .u-unfollow-btn .u-sprite{
+	float: left;
+	margin: 5px;
+	background: url(../img/sprite.png) -86px 0px no-repeat;
+	width: 11px;
+	height: 9px;
+}
+.m-head .u-unfollow-btn .u-follow{
+	font:12px/19px simsun;
+	color: #333333;
+}
+.m-head .u-unfollow-btn .u-follow span{
+	color: #999999;	
+}
+.m-head .unfollow{
+	cursor: pointer;
+}
+.m-head .u-unfollow-btn:hover{
+	background-color:#ffffff;
+}
+.m-head .u-unfollow-btn:hover .unfollow{
+	text-decoration: underline;
+	color: #21a557;
+}
+.m-head .m-nav{
+	float: right;
+}
+.m-head .m-nav ul{
+	overflow: hidden;
+}
+.m-head .m-nav li{
+	display: inline-block;
+	margin-left: 54px;
+}
+.m-head .m-nav .u-sprite{
+	float: right;
+	margin: 35px 14px;
+	background: url(../img/sprite.png) no-repeat -23px 0;
+	width: 19px;
+	height: 19px;
+}
+.m-head .m-nav a{
+	font: 16px/89px "Hiragino Sans GB";
+	color: #666666;
+	text-decoration: none;
+}
+.m-head .m-nav a:hover{
+	color:#39a030 ;
+}
+@media only screen and (min-width: 0px) and (max-width: 1204px) {
+	.m-head{
+		width: 980px;
+}
+}
 
+.g-nav1{
+	width: 100%;
+	height: 460px;
+	overflow: hidden;
+}
+.g-nav1 .m-silder{
+	position: relative;
+	width: 100%;
+	height: 460px;
+	overflow: hidden;
+}
+.m-silder .box{
+	width: 100%;
+}
+.m-silder .box li{
+	position: absolute;
+	width: 100%;
+	left: 50%;
+	margin-left: -826px;
+	z-index: -9999;
+}
 
-
+/*------------------------------------------*/
+.g-nav2{
+	width: 100%;
+	height: 295px;
+}
+.g-nav2 .m-intro{
+	height: 295px;
+	width: 1205px;
+	margin:  0 auto;
+}
+.m-intro .box{
+	margin-left: -80px;
+}
+.m-intro .box .item{
+	float: left;
+	padding-left: 80px;
+	height: 100%;
+	width: 33.33%;
+	box-sizing: border-box;
+}
+.m-intro p{
+	background: deepskyblue;
+	height: 295px;
+}
+@media only screen and (min-width: 0px) and (max-width: 1204px) {
+	.g-nav2 .m-intro{
+		width: 980px;
+	}
+}
+.g-nav3 li{
+	display: inline-block;
+}
+/*------------------------------------------*/
 
 
 
