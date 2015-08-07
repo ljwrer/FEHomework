@@ -237,6 +237,7 @@ table {
 }
 .m-silder .box{
 	width: 100%;
+	background: deepskyblue;
 }
 .m-silder .box li{
 	position: absolute;
@@ -244,6 +245,16 @@ table {
 	left: 50%;
 	margin-left: -826px;
 	z-index: -9999;
+}
+@media only screen and (min-width: 1652px){
+	.m-silder .box li{
+		left: 0;
+		right: 0;
+		margin-left:0;
+	}
+	.m-silder .box li img{
+		width: 100%;
+	}
 }
 
 /*------------------------------------------*/
