@@ -220,7 +220,7 @@ table {
 @media only screen and (min-width: 0px) and (max-width: 1204px) {
 	.m-head{
 		width: 100%;
-	}
+}
 }
 
 .g-nav1{
@@ -288,6 +288,7 @@ table {
 }
 
 .m-intro .item1 .u-sprite{
+
 	background: url(../img/sprite.png) no-repeat 0 -24px;
 }
 .m-intro .item2 .u-sprite{
@@ -321,19 +322,10 @@ table {
 }
 
 @media only screen and (min-width: 0px) and (max-width: 1204px) {
-	.g-nav2{
-		overflow: hidden;
-	}
-	.g-nav2 .m-intro {
+	.g-nav2 .m-intro{
 		width: 980px;
 		/*width: 100%;*/
 		min-width: ;
-	}
-	.m-intro .box {
-		margin-left: -50px;
-	}
-	.m-intro .box .item {
-		padding-left: 50px;
 	}
 }
 .g-nav3{
