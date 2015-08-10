@@ -1,0 +1,11 @@
+require.config({
+	baseUrl:"js",
+	paths:{
+		"base":"base/base"
+	}
+})
+require(["base"],function(base){
+	base.getAjax("http://study.163.com/webDev/couresByCategory.htm",{pageNo:2,psize:20,type:10},function(s){
+		document.write(s)
+	})
+})

@@ -99,11 +99,7 @@ table {
 .m-tip span{
 	margin-left: 6px;
 	width: 48px;
-}
-@media only screen and (min-width: 0px) and (max-width: 1204px) {
-	.m-tip{
-		width: 100%;
-	}
+	/*text-shadow: 0 1px #cccccc;*/
 }
 .g-head{
 	width: 100%;
@@ -217,12 +213,6 @@ table {
 .m-head .m-nav a:hover{
 	color:#39a030 ;
 }
-@media only screen and (min-width: 0px) and (max-width: 1204px) {
-	.m-head{
-		width: 100%;
-}
-}
-
 .g-nav1{
 	width: 100%;
 	height: 460px;
@@ -266,18 +256,6 @@ table {
 .m-silder .m-pointer .f-cur{
 	background:black;
 }
-
-@media only screen and (min-width: 1652px){
-	.m-silder .box li{
-		left: 0;
-		right: 0;
-		margin-left:0;
-	}
-	.m-silder .box li img{
-		width: 100%;
-	}
-}
-
 /*------------------------------------------*/
 .g-nav2{
 	width: 100%;
@@ -342,14 +320,6 @@ table {
 .m-intro .u-content a:hover{
 	text-decoration: underline;
 }
-
-@media only screen and (min-width: 0px) and (max-width: 1204px) {
-	.g-nav2 .m-intro{
-		width: 980px;
-		/*width: 100%;*/
-		min-width: ;
-	}
-}
 .g-nav3{
 	width: 100%;
 	height: 222px;
@@ -376,10 +346,182 @@ table {
 	box-sizing: border-box;
 }
 /*------------------------------------------*/
+.g-contnet{
+	width: 100%;
+	height: 1551px;
+	background: #f8f8f8;
+	overflow: hidden;
+}
+.g-content-box{
+	padding-top: 81px;
+	width: 1205px;
+	margin: 0 auto;
+	overflow: hidden;
+	background: rgba(0,191,255,0.8);
+}
+.g-main{
+	/*float: left;*/
+	overflow: hidden;
+	border: 1px solid black;
+}
+.g-main .m-tab{
+	margin-bottom: 29px;	
+	overflow: hidden;
+}
+.m-tab span{
+	display: inline-block;
+	height: 50px;
+	width: 200px;
+	font:20px/50px "microsoft yahei";
+	text-align: center;
+	background: #ffffff;
+}
+.m-tab .j-tabed{
+	background: #39a030;
+}
 
+.m-card-box{
+	font-size: 0;
+	/*width: 750px;*/
+	width: 1000px;
+	height: 1240px;
+	overflow: hidden;
+	border: 1px solid black;
+}
+.m-card{
+	display: inline-block;
+	width: 225px;
+	height: 228px;
+	margin: 0 20px 20px 0;
+	overflow: hidden;
+	background: #ffffff;
+	background: rgba(0,100,0,0.5);
+}
+.m-card img{
+	
+	width: 223px;
+	height: 124px;
+	margin: 1px 1px 0;
+}
+.m-card .description{
+	padding:10px 11px 0 5px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font: 12px/12px "microsoft yahei";
+	color: #333333;
 
+}
+.m-card .provider{
+	padding: 10px 0 0 5px;
+	font: 12px/12px "microsoft yahei";
+	color: #999999;
+}
+.m-card .m-learnercount{
+	width: 38px;
+	height: 16px;
+	margin: 10px 0 0 5px;
+	border: 1px solid #dddddd;
+	border-radius: 1px;
+	font: 8px "microsoft yahei";
+	color: #999999;
+}
+.m-card .m-learnercount .u-sprite {
+	float: left;
+	background: url(../img/sprite.png) no-repeat -195px 0;
+	width: 9px;
+	height: 11px;
+	margin: 3px 5px 0 2px;
+}
+.m-card .m-learnercount span{
+	display: inline-block;
+	line-height: 16px;
+}
+.m-card .price{
+	display: block;
+	padding: 10px 0 10px 5px;
+	font:12px/12px "microsoft yahei";
+	color: #ff3f00;
+}
+.g-main .m-pager{
+	float: right;
+	color: #666666;
+}
+.m-pager{
+	font-size: 0;
+}
+.m-pager li{
+	display: inline-block;
+	font: 14px "microsoft yahei";
+}
+.g-aside{
+	float: right;
+	margin-top: 3px;
+	background: cornflowerblue;
+	height: 1028px;
+	width: 223px;
+	border: 1px solid black;
+}
+.m-org{
+	background: yellow;
+	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb,;
+}
+.m-org h2{
+	display: block;
+	padding-left: 20px;
+	border-bottom: 1px solid #dddddd;
+	height: 55px;
+	font: 16px/55px "microsoft yahei";
+	color: #333333;
+}
+.m-org h3{
+	display: block;
+	padding-left: 20px;
+	padding-top: 12px;
+	font: 14px/22px "microsoft sans serif";
+	color: #666666;
+}
+.m-org img{
+	padding-top: 8px;
+	padding-left: 20px;
+	padding-bottom: 20px;
+}
+.g-aside .m-rank{
+	background: yellow;
+	margin-top: 21px;
+}
 
-
-
-
+/* ---------------------------------- */
+@media only screen and (min-width: 0px) and (max-width: 1204px) {
+	.m-tip{
+		width: 100%;
+		/*width: 980px;*/
+	}
+}
+@media only screen and (min-width: 0px) and (max-width: 1204px) {
+	.m-head{
+		width: 100%;
+		/*width: 980px;*/
+}
+}
+@media only screen and (min-width: 0px) and (max-width: 1204px) {
+	.m-head{
+		width: 100%;
+		/*width: 980px;*/
+}
+}
+@media only screen and (min-width: 0px) and (max-width: 1204px) {
+	.g-nav2 .m-intro{
+		width: 980px;
+		/*width: 100%;*/
+	}
+}
+@media only screen and (max-width:1204px ) {
+	.g-content-box{
+		width: 100%;
+	}
+	.m-card-box{
+		width: 750px;
+	}
+}
 
