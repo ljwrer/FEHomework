@@ -226,7 +226,6 @@ table {
 }
 .m-silder .box{
 	width: 100%;
-	background: deepskyblue;
 }
 .m-silder .box li{
 	position: absolute;
@@ -357,12 +356,10 @@ table {
 	width: 1205px;
 	margin: 0 auto;
 	overflow: hidden;
-	background: rgba(0,191,255,0.8);
 }
 .g-main{
 	/*float: left;*/
 	overflow: hidden;
-	border: 1px solid black;
 }
 .g-main .m-tab{
 	margin-bottom: 29px;	
@@ -386,7 +383,6 @@ table {
 	width: 1000px;
 	height: 1240px;
 	overflow: hidden;
-	border: 1px solid black;
 }
 .m-card{
 	display: inline-block;
@@ -395,7 +391,8 @@ table {
 	margin: 0 20px 20px 0;
 	overflow: hidden;
 	background: #ffffff;
-	background: rgba(0,100,0,0.5);
+	/*background: rgba(0,100,0,0.5);*/
+	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
 }
 .m-card img{
 	
@@ -445,26 +442,42 @@ table {
 }
 .g-main .m-pager{
 	float: right;
-	color: #666666;
+	margin-right: 15px;
 }
 .m-pager{
 	font-size: 0;
+	color: #666666;
 }
 .m-pager li{
 	display: inline-block;
-	font: 14px "microsoft yahei";
+	height: 20px;
+	width: 20px;
+	margin: 0 5px;
+	font: 14px/20px "microsoft yahei";
+	text-align: center;
 }
+.m-pager li:first-child,.m-pager li:last-child{
+	width: 30px;
+	background: #9dd8b1;	
+}
+.m-pager li:hover{
+	color:#39a030;
+}
+.m-pager .f-cur{
+	background: #9dd8b1;
+}
+
+/* --------------------------------------- */
 .g-aside{
 	float: right;
 	margin-top: 3px;
-	background: cornflowerblue;
 	height: 1028px;
 	width: 223px;
-	border: 1px solid black;
 }
-.m-org{
-	background: yellow;
-	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb,;
+.g-aside .m-org{
+	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
+	border-bottom: 1px solid #d4d3d3;
+	background: #ffffff;
 }
 .m-org h2{
 	display: block;
@@ -487,8 +500,56 @@ table {
 	padding-bottom: 20px;
 }
 .g-aside .m-rank{
-	background: yellow;
-	margin-top: 21px;
+	margin-top: 20px;
+	padding-bottom: 20px;
+	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
+	border-bottom: 1px solid #d4d3d3;
+	background: #ffffff;
+}
+.m-rank h2{
+	display: block;
+	padding-left: 20px;
+	border-bottom: 1px solid #eeeeee;
+	height: 56px;
+	font: 16px/56px "microsoft yahei";
+	color: #333333;
+}
+.m-ranklist .m-minicard{
+	padding: 20px 0 0 20px;
+}
+.m-minicard img{
+	float: left;
+	margin-right: 12px;
+}
+.m-minicard .detail{
+	overflow: hidden;
+}
+.m-minicard .detail p{
+	width: 124px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font: 14px/16px "microsoft yahei";
+	color: #333333;
+}
+.m-minicard .count{
+	padding-left: 1px;
+	padding-top: 10px;
+}
+.m-minicard .u-sprite{
+	float: left;
+	margin-top: 1px;
+	margin-right: 6px;
+	background: url(../img/sprite.png) no-repeat -219px 0;
+	width: 9px;
+	height: 10px;
+}
+.m-minicard span{
+	display: block;
+	height: 11px;
+	font: 10px/11px "microsoft yahei";
+	color: #999999;
+	overflow: hidden;
 }
 
 /* ---------------------------------- */
