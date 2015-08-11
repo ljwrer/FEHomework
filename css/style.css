@@ -113,9 +113,25 @@ table {
 }
 .m-head .m-logo{
 	float: left;
+	padding-top: 30px;
 	margin-right: 30px;
 }
-.m-head .logo1{
+.m-logo {
+	width: 255px;
+	font-size: 0;
+}
+.m-logo .u-sprite {
+	float: left;
+	margin: 3px 10px 0px 1px;
+	background: url(../img/sprite.png) no-repeat -280px -24px;
+	width: 70px;
+	height: 19px;
+}
+.m-logo p {
+	padding-top: 1px;
+	font: 22px/20px "Hiragino Sans GB";
+}
+/*.m-head .logo1{
 	padding-right: 10px;
 	border-right: 1px solid #39a030;
 	font:28px/89px "gill sans mt" bold;
@@ -124,7 +140,7 @@ table {
 .m-head .logo2{
 	font: 22px/89px "Hiragino Sans GB";
 	color: #333333;
-}
+}*/
 
 .m-head .m-follow{
 	float: left;
@@ -389,7 +405,7 @@ table {
 	width: 225px;
 	height: 228px;
 	margin: 0 20px 20px 0;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	background: #ffffff;
 	/*background: rgba(0,100,0,0.5);*/
 	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
@@ -406,6 +422,7 @@ table {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	font: 12px/12px "microsoft yahei";
+	max-width: 225px;
 	color: #333333;
 
 }
@@ -413,6 +430,7 @@ table {
 	padding: 10px 0 0 5px;
 	font: 12px/12px "microsoft yahei";
 	color: #999999;
+	max-width: 225px;
 }
 .m-card .m-learnercount{
 	width: 38px;
@@ -422,6 +440,7 @@ table {
 	border-radius: 1px;
 	font: 8px "microsoft yahei";
 	color: #999999;
+	max-width: 225px;
 }
 .m-card .m-learnercount .u-sprite {
 	float: left;
@@ -439,6 +458,7 @@ table {
 	padding: 10px 0 10px 5px;
 	font:12px/12px "microsoft yahei";
 	color: #ff3f00;
+	max-width: 225px;
 }
 .g-main .m-pager{
 	float: right;
@@ -551,6 +571,132 @@ table {
 	color: #999999;
 	overflow: hidden;
 }
+/* ---------------------------------- */
+.g-foot{
+	width: 100%;
+	height: 262px;
+	background:#2c3339;
+	overflow: hidden;
+}
+.g-foot .m-foot{
+	width: 1205px;
+	height: 262px;
+	margin: 0 auto;
+}
+.m-foot .m-copyright{
+	float: left;
+	padding-top: 92px;
+	padding-left: 50px;
+	margin-right: 150px;
+}
+.m-foot .m-copyright .m-logo .u-sprite{
+	background: url(../img/sprite.png) no-repeat -280px -52px;
+	width: 70px;
+	height: 19px;
+}
+.m-foot .m-copyright .m-logo p{
+	color: #39a030;
+}
+.m-copyright .u-copy{
+	padding-top: 20px;
+}
+
+.m-copyright>p{
+	font: 12.5px/25px "microsoft yahei";
+	color: #ffffff;
+}
+.m-foot .m-footlinks{
+	/*max-height: 120px;*/
+	padding-top: 80px;
+}
+.m-footlinks{
+	font: 14.58px/29.17px "microsoft yahei";
+	color: #ffffff;
+	overflow: hidden;
+}
+.m-footlinks a{
+	color: #ffffff;
+	text-decoration: none;
+}
+.m-footlinks a:hover{
+	text-decoration: none;
+	text-decoration: underline;
+}
+.m-footlinks ul{
+	float: left;
+	margin-right: 100px;
+}
+.m-footlinks ul:last-child{
+	margin: 0;
+	
+}
+
+.m-footlinks .follow{
+	position: relative;
+}
+.m-footlinks .u-sprite{
+	position: absolute;
+	left: 41px;
+	top: 8px;
+	background: url(../img/sprite.png) no-repeat -244px 0;
+	width: 20px;
+	height: 16px;
+}
+/* *********************************** */
+.j-relative{
+	position: relative;
+	z-index: 1;
+	overflow: visible;
+}
+.j-bigcard{
+	position: absolute;
+	z-index: 999;
+	left: 0;
+	top: 0;
+	width: 470px;
+	height: 250px;
+	background: deepskyblue;
+	border: 2px solid #d6d6d6;
+	border-radius: 2px;
+}
+.j-bigcard .top{
+	padding: 19px 19px 20px;
+	background: #ffffff;
+}
+.j-bigcard img{
+	float: left;
+	margin-right: 19px;
+}
+.j-bigcard .detail{
+	overflow: hidden;
+}
+.j-bigcard .detail h2{
+	font: 18px/18px "microsoft yahei";
+	color: #333333;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ---------------------------------- */
 @media only screen and (min-width: 0px) and (max-width: 1204px) {
@@ -569,7 +715,10 @@ table {
 	.m-head{
 		width: 100%;
 		/*width: 980px;*/
-}
+	}
+	.g-foot .m-foot{
+		width: 980px;
+	}
 }
 @media only screen and (min-width: 0px) and (max-width: 1204px) {
 	.g-nav2 .m-intro{
@@ -579,10 +728,13 @@ table {
 }
 @media only screen and (max-width:1204px ) {
 	.g-content-box{
-		width: 100%;
+		width: 980px;
 	}
 	.m-card-box{
 		width: 750px;
+	}
+	.g-contnet .g-main .m-pager{
+		margin-right: 38px;
 	}
 }
 
