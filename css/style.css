@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+ /** {padding:0;marging:0};*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -655,11 +655,12 @@ table {
 	top: 0;
 	width: 470px;
 	height: 250px;
-	background: deepskyblue;
+	background: #f8f8f8;;
 	border: 2px solid #d6d6d6;
 	border-radius: 2px;
 }
 .j-bigcard .top{
+	height: 124px;
 	padding: 19px 19px 20px;
 	background: #ffffff;
 }
@@ -670,15 +671,151 @@ table {
 .j-bigcard .detail{
 	overflow: hidden;
 }
+.j-bigcard .detail p{
+	font: 12px/12px "microsoft yahei";
+	color: #666666;
+}
 .j-bigcard .detail h2{
 	font: 18px/18px "microsoft yahei";
 	color: #333333;
 }
+.j-bigcard .count{
+	margin-top: 20px;
+}
+.j-bigcard .detail .u-sprite{
+	float: left;
+	margin:1px 6px 0 0;
+	background: url(../img/sprite.png) no-repeat -219px 0;
+	width: 9px;
+	height: 10px;
+}
+.j-bigcard .prov{
+	padding-top: 12px;
+}
+.j-bigcard .category{
+	padding-top: 8px;
+}
+.j-bigcard .des{
+	height: 72px;
+	padding: 12px 25px 3px 19px;
+	overflow: hidden;
+	font: 14px/24px "microsoft yahei";
+	color: #666666;
+}
+/* *********************************** */
+.g-mask{
+	/*display: none;*/
+	position: fixed;
+	z-index: 9999;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.5);
+	background: url(../img/bg.png) \0;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=95)"; 
+}
+.g-mask1{
+	display: none;
+}
+.g-mask1 .m-login{
+	position: absolute;
+	z-index: 19999;
+	width: 387px;
+	height: 288px;
+	left: 50%;
+	top: 50%;
+	margin-left: -193.5px;
+	margin-top: -144px;
+	background: #ffffff;
+}
+.m-login .u-sprite{
+	position: absolute;
+	top: 10px;
+	right: 8px;
+	background: url(../img/sprite.png) no-repeat -280px 0;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+}
+.m-login form{
+	padding-top: 22px;
+	padding-left: 40px;
+}
+.m-login h3{
+	font: 18px/28px "microsoft yahei";
+	color: #444444;
+}
+.m-login form p{
+	margin-top: 15px;
+	border: 1px solid #dfdfdf;
+	width: 293px;
+	height: 43px;
+}
+.m-login form p:first-of-type{
+	margin-top: 18px;
+}
+.m-login form p input{
+	border: none;
+	width: 291px;
+	height: 41px;
+	padding: 0px;
+	box-shadow: -2px -2px 0 #f1f1f1,0px -2px 0 #f1f1f1,-2px 0px 0 #f1f1f1;
+	background: #fafafa;
+	margin-left: 2px;
+	margin-top: 2px;
+	font: 16px/41px "microsoft yahei";
+	/*color: #cccccc;*/
+}
+.m-login form button{
+	width: 293px;
+	height: 46px;
+	margin-top: 29px;
+	background: radial-gradient(ellipse at 0 0, #27ad4b,#108927);
+	background: url(../img/sprite.png) no-repeat -407px -24px \0;
+	width: 295px \0;
+	height: 48px \0;
+	box-shadow: 1px 1px 0 #d5e3da;
+	border: 0;
+	padding: 0;
+	text-align: center;
+	font: 16px/46px "microsoft yahei";
+	color: #ffffff;
+}
 
+/* ----------------------------------- */
+.m-video{
+	position: absolute;
+	z-index: 19999;
+	width: 950px;
+	height: 676px;
+	left: 50%;
+	top: 50%;
+	margin-left: -475px;
+	margin-top: -338px;
+	background: #ffffff;
+}
+.m-video .u-sprite{
+	position: absolute;
+	right: 12px;
+	top: 13px;
+	background: url(../img/sprite.png) no-repeat -280px 0;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+}
 
-
-
-
+.m-video h2{
+	padding-top: 18px;
+	padding-left: 30px;
+	font: 18px/28px "microsoft yahei";
+	color: #444444;
+}
+.m-video video{
+	display: block;
+	background: #000000;
+	margin: 20px auto 0;
+}
 
 
 
