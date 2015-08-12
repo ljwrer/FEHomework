@@ -451,6 +451,7 @@ define([], function() {
 		}
 		return result;
 	}
+	
 
 	return {
 		addEvent: addEvent,

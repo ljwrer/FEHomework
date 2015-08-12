@@ -2,10 +2,13 @@ require.config({
 	baseUrl:"js",
 	paths:{
 		"base":"base/base"
+		"util":"base/util"
 	}
 })
-require(["base"],function(base){
-	base.getAjax("http://study.163.com/webDev/couresByCategory.htm",{pageNo:2,psize:20,type:10},function(s){
-		document.write(s)
-	})
+require(["base","util"],function(base,util){
+	/* 不再提醒 */
+	var notip=document.getElementById("notip");
+	notip.onclick=function(){
+		
+	}
 })
