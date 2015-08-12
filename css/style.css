@@ -784,6 +784,9 @@ table {
 }
 
 /* ----------------------------------- */
+.g-mask2{
+	display: none;	
+}
 .m-video{
 	position: absolute;
 	z-index: 19999;
