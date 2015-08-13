@@ -3,21 +3,21 @@
 
 	<head>
 		<meta charset="utf-8" />
-		<title></title>
+		<title>前端培训大作业</title>
 		<link rel="stylesheet" href="css/style.css" />
 		<script type="text/javascript" src="js/lib/require.js" data-main = "js/main/main.js" ></script>
 	</head>
 
 	<body>
-		<div class="g-tip">
+		<!--<div class="g-tip">
 			<div class="m-tip clear-fix">
-				<p>网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！<a href="http://study.163.com/smartSpec/intro.htm">立即查看></a></p>
+				<p>网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！<a href="http://study.163.com/smartSpec/intro.htm" target="_blank">立即查看></a></p>
 				<div class="u-notip" id="notip">
 					<p class="u-sprite"></p>
 					<span>不再提醒</span>
 				</div>
 			</div>
-		</div>
+		</div>-->
 		<div class="g-head">
 			<div class="m-head  clear-fix">
 				<div class="m-logo clear-fix">
@@ -29,11 +29,11 @@
 				<div class="m-follow clear-fix">
 					<div class="u-follow-btn clear-fix">
 						<div class="u-sprite"></div>
-						<div class="u-follow">关注</div>
+						<div class="u-follow" id="follow">关注</div>
 					</div>
-					<div class="u-unfollow-btn clear-fix" style="display: none;">
+					<div class="u-unfollow-btn clear-fix j-hide">
 						<div class="u-sprite clear-fix"></div>
-						<div class="u-follow">已关注 <span>|</span><span class="unfollow">取消</span></div>
+						<div class="u-follow" id="unfollow">已关注 <span>| </span><span class="unfollow">取消</span></div>
 					</div>
 					<span class="fans">粉丝 45</span>
 				</div>
@@ -42,9 +42,9 @@
 
 					</div>
 					<ul>
-						<li><a href="http://open.163.com/">网易公开课</a></li>
-						<li><a href="http://study.163.com/">云课堂</a></li>
-						<li><a href="http://www.icourse163.org/">中国大学MOOC</a></li>
+						<li><a href="http://open.163.com/" target="_blank">网易公开课</a></li>
+						<li><a href="http://study.163.com/" target="_blank">云课堂</a></li>
+						<li><a href="http://www.icourse163.org/" target="_blank">中国大学MOOC</a></li>
 					</ul>
 
 				</div>
@@ -583,9 +583,9 @@
 			</div>
 			
 		</div>
-		<div class="g-mask g-mask1">
+		<div class="g-mask g-mask1 j-hide" id="login">
 			<div class="m-login">
-				<div class="u-sprite">
+				<div class="u-sprite" id="closeLogin">
 					
 				</div>
 				<form action="http://study.163.com /webDev/login.htm" method="post">
@@ -596,7 +596,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="g-mask g-mask2">
+		<div class="g-mask g-mask2 j-hide">
 			<div class="m-video">
 				<div class="u-sprite">
 					

@@ -153,6 +153,7 @@ table {
 	height: 21px;
 	background-color:#21a557;
 	border-radius: 1px;
+	cursor: pointer;
 }
 .m-head .u-follow-btn .u-sprite{
 	float: left;
@@ -179,6 +180,7 @@ table {
 	background-color:#f8f8f8;
 	border: 1px solid #efefef;
 	border-radius: 1px;	
+	cursor: pointer;
 }
 .m-head .u-unfollow-btn .u-sprite{
 	float: left;
@@ -655,9 +657,6 @@ table {
 	background: url(../img/bg.png) \0;
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=95)"; 
 }
-.g-mask1{
-	display: none;
-}
 .g-mask1 .m-login{
 	position: absolute;
 	z-index: 19999;
@@ -724,9 +723,6 @@ table {
 }
 
 /* ----------------------------------- */
-.g-mask2{
-	display: none;	
-}
 .m-video{
 	position: absolute;
 	z-index: 19999;
@@ -859,5 +855,12 @@ table {
 	overflow: hidden;
 	font: 14px/24px "microsoft yahei";
 	color: #666666;
+}
+
+.j-hide{
+	display: none;
+}
+.j-show{
+	display: block;
 }
 
