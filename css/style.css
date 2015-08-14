@@ -250,7 +250,6 @@ table {
 	width: 100%;
 	left: 50%;
 	margin-left: -826px;
-	z-index: -9999;
 }
 .m-silder .m-pointer{
 	position: absolute;
@@ -270,7 +269,7 @@ table {
 	border-radius: 50%;
 	background: white;
 }
-.m-silder .m-pointer .f-cur{
+.m-silder .m-pointer .j-cur{
 	background:black;
 }
 /*------------------------------------------*/
@@ -863,4 +862,13 @@ table {
 .j-show{
 	display: block;
 }
+.j-banner-show{
+	z-index: 1;
+	opacity: 0;
+}
+.j-banner-hide{
+	z-index: -9999;
+	opacity: 0;
+}
+
 

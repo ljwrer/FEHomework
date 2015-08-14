@@ -7,6 +7,15 @@ define(["base"], function(base) {
 			return this.textContent = s;
 		});
 	}
+	var GennerUtil = {
+		repalceChar: function(str, char) {
+			var i;
+			while ((i = str.indexOf(char)) != -1) {
+				str = str.slice(0, i) + str.charAt(i + 1).toUpperCase() + str.slice(i + 2);
+			}
+			return str;
+		}
+	};
 	var CookieUtil = {
 		get: function(name) {
 			if (!document.cookie) return null;
@@ -112,6 +121,19 @@ define(["base"], function(base) {
 		show: function(ele) {
 			DomUtil.removeClass(ele, "j-hide");
 			DomUtil.addClass(ele, "j-show");
+		},
+		getStyle: function(ele) {
+			if (window.getComputedStyle) {
+				return window.getComputedStyle(ele);
+			} else {
+				return ele.currentStyle;
+			}
+		},
+		get: function(ele, prop) {
+			var dec = this.getStyle(ele);
+			prop = GennerUtil.repalceChar(prop, "-");
+			var result = dec[prop];
+			return result;
 		}
 	};
 
@@ -172,7 +194,7 @@ define(["base"], function(base) {
 					if (xhr.status >= 200 && xhr.status <= 300 || xhr.status == 304) {
 						callback(xhr.responseText);
 					} else {
-//						alert("get failed,status:" + xhr.status);
+						//						alert("get failed,status:" + xhr.status);
 					}
 				}
 			};
@@ -186,20 +208,79 @@ define(["base"], function(base) {
 					if (xhr.status >= 200 && xhr.status <= 300 || xhr.status == 304) {
 						callback(xhr.responseText);
 					} else {
-//						alert("post failed,status:" + xhr.status);
+						//						alert("post failed,status:" + xhr.status);
 					}
 				}
 			};
 			xhr.send(this.serialize(options));
 		}
 	};
+	var MoveUtil = {
+		moveElement: function(ele, finalX, finalY, intervel) {
+			finalX = parseInt(finalX);
+			finalY = parseInt(finalY);
+			if (ele.interverID) {
+				clearInterval(ele.interverID);
+			}
+			function step() {
+				var currentX = parseInt(window.getComputedStyle(ele).left);
+				var currentY = parseInt(window.getComputedStyle(ele).top);
+				var dist = 0
+				if (currentX === finalX && currentY === finalY) {
+					clearInterval(intervelID);
+				}
+				if (currentX < finalX) {
+					dist = Math.ceil((finalX - currentX) / 10);
+					currentX += dist;
+				} else if (currentX > finalX) {
+					dist = Math.ceil((currentX - finalX) / 10);
+					currentX -= dist;
+				}
+				if (currentY < finalY) {
+					dist = Math.ceil((finalX - currentX) / 10);
+					currentY += dist;
+				} else if (currentY > finalY) {
+					dist = Math.ceil((currentY - finalY) / 10);
+					currentY -= dist;
+				}
+				ele.style.left = currentX + "px";
+				ele.style.top = currentY + "px";
+			}
+			var intervelID = setInterval(step, intervel);
+			ele.interverID = intervelID;
+		},
+		fadeOver: function(ele,time,callback) {
+			if(ele.interverID){
+				clearInterval(ele.interverID);
+			}
+			var dist=1*25/500;
+			function step(){
+				var currentOp=StyleUtil.get(ele,"opacity");
+				currentOp+=dist;
+				if(currentOp>=1){
+					ele.opacity=1;
+					clearInterval(intervelID);
+					ele.intervalID=undefined;
+					if(callback){
+						callback();
+					}
+				}else{
+					ele.opacity=currentOp;
+				}
+			}
+			var intervelID=setInterval(step,25);
+			ele.intervalID=intervelID;
+		}
+	};
 
 	return {
+		GennerUtil: GennerUtil,
 		CookieUtil: CookieUtil,
 		DomUtil: DomUtil,
 		EventUtil: EventUtil,
 		StyleUtil: StyleUtil,
 		FormUtil: FormUtil,
-		AjaxUtil: AjaxUtil
+		AjaxUtil: AjaxUtil,
+		MoveUtil:MoveUtil
 	};
 })
