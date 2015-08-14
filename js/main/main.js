@@ -14,7 +14,7 @@ require.config({
 require(["base", "util", "md5"], function(base, util, md5) {
 	/* 关闭顶部通知条 */
 	(function() {
-		var gtip = document.querySelector(".g-tip");
+		var ghead = document.querySelector(".g-head");
 		if (!util.CookieUtil.get("notip")) {
 			var gtip = document.createElement("div");
 			gtip.className = "g-tip";
@@ -111,12 +111,14 @@ require(["base", "util", "md5"], function(base, util, md5) {
 	(function() {
 		var bannerView = document.getElementById("bannerView");
 		var bannerList = bannerView.children;
-		var bannerBtnList = document.getElementById("pointer").children;
-		var PREV = 0;
-		var CURRENT = 1;
-		var NEXT = 2;
+		var bannerBtnBox=document.getElementById("pointer")
+		var bannerBtnList = bannerBtnBox.children;
+		var PREV = 2;
+		var CURRENT = 0;
+		var NEXT = 1;
 		var NUM = bannerList.length;
 		var intervalID;
+
 		function bannerBtn(callback) {
 			var btnStep = function() {
 				util.DomUtil.addClass(bannerBtnList[CURRENT], "j-cur");
@@ -129,7 +131,9 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		}
 
 		function banner() {
-			var dist = 1 * 25 / 500;
+			var dist = 1 * 10 / 500;
+			bannerList[PREV].style.opacity = 0;
+			bannerList[CURRENT].style.opacity = 0;
 			var bannerStep = function() {
 				util.DomUtil.removeClass(bannerList[PREV], "j-banner-show");
 				util.DomUtil.addClass(bannerList[PREV], "j-banner-hide");
@@ -138,18 +142,62 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				var currentOp = parseFloat(util.StyleUtil.get(bannerList[CURRENT], "opacity"));
 				currentOp += dist;
 				if (currentOp >= 1) {
-					bannerList[CURRENT].style.opacity=1;
-					PREV = CURRENT;
-					CURRENT = NEXT;
-					NEXT++;
-					NEXT = NEXT % NUM;
+					bannerList[CURRENT].style.opacity = 1;
 					clearInterval(intervalID);
-				}else{
-					bannerList[CURRENT].style.opacity=currentOp;
+					counter();
+				} else {
+					bannerList[CURRENT].style.opacity = currentOp;
 				}
 			}
-			var intervalID = setInterval(bannerStep, 20);
+			var intervalID = setInterval(bannerStep, 10);
 		}
+
+		function counter() {
+			PREV = CURRENT;
+			CURRENT = NEXT;
+			NEXT++;
+			NEXT = NEXT % NUM;
+		}
+		
+		banner();
 		bannerBtn(banner);
+		
+		util.EventUtil.addEvent(bannerView, "mouseover", viewOverHandle);
+		util.EventUtil.addEvent(bannerView, "mouseout", viewOutHandle);
+		function viewOverHandle(event) {
+			event = util.EventUtil.getEvent(event);
+			var target = util.EventUtil.getTarget(event);
+			if(target.nodeName=="IMG"){
+				bannerList[CURRENT].style.opacity = 1;
+				clearInterval(intervalID);
+			}
+		}
+		function viewOutHandle(event){
+			event = util.EventUtil.getEvent(event);
+			var target = util.EventUtil.getTarget(event);
+			if(target.nodeName=="IMG"){
+				bannerBtn(banner);
+			}
+		}
+		
+		util.EventUtil.addEvent(bannerBtnBox, "click", bannerBtnHandle);
+		function bannerBtnHandle(event){
+			event = util.EventUtil.getEvent(event);
+			var target = util.EventUtil.getTarget(event);
+			if(target.nodeName=="LI");
+			{
+				var item=util.ArrayUtil.search(this.children,target);
+				PREV=CURRENT;
+				CURRENT=item;
+				NEXT=(CURRENT+1)%3;
+				clearInterval(intervalID);
+				banner();
+				bannerBtn(banner);
+				
+			}
+		}
+
+
+
 	})();
 })

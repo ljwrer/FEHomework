@@ -222,6 +222,7 @@ define(["base"], function(base) {
 			if (ele.interverID) {
 				clearInterval(ele.interverID);
 			}
+
 			function step() {
 				var currentX = parseInt(window.getComputedStyle(ele).left);
 				var currentY = parseInt(window.getComputedStyle(ele).top);
@@ -249,29 +250,42 @@ define(["base"], function(base) {
 			var intervelID = setInterval(step, intervel);
 			ele.interverID = intervelID;
 		},
-		fadeOver: function(ele,time,callback) {
-			if(ele.interverID){
+		fadeOver: function(ele, time, callback) {
+			if (ele.interverID) {
 				clearInterval(ele.interverID);
 			}
-			var dist=1*25/500;
-			function step(){
-				var currentOp=StyleUtil.get(ele,"opacity");
-				currentOp+=dist;
-				if(currentOp>=1){
-					ele.opacity=1;
+			var dist = 1 * 25 / 500;
+
+			function step() {
+				var currentOp = StyleUtil.get(ele, "opacity");
+				currentOp += dist;
+				if (currentOp >= 1) {
+					ele.opacity = 1;
 					clearInterval(intervelID);
-					ele.intervalID=undefined;
-					if(callback){
+					ele.intervalID = undefined;
+					if (callback) {
 						callback();
 					}
-				}else{
-					ele.opacity=currentOp;
+				} else {
+					ele.opacity = currentOp;
 				}
 			}
-			var intervelID=setInterval(step,25);
-			ele.intervalID=intervelID;
+			var intervelID = setInterval(step, 25);
+			ele.intervalID = intervelID;
 		}
 	};
+	var ArrayUtil = {
+		search:function(arr, item) {
+			var ret = -1;
+			for (var i = 0, len = arr.length; i < len; i++) {
+				if (arr[i] === item) {
+					ret = i;
+					break;
+				}
+			}
+			return ret;
+		}
+	}
 
 	return {
 		GennerUtil: GennerUtil,
@@ -281,6 +295,7 @@ define(["base"], function(base) {
 		StyleUtil: StyleUtil,
 		FormUtil: FormUtil,
 		AjaxUtil: AjaxUtil,
-		MoveUtil:MoveUtil
+		MoveUtil: MoveUtil,
+		ArrayUtil:ArrayUtil
 	};
 })

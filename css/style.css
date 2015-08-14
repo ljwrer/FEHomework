@@ -244,6 +244,7 @@ table {
 }
 .m-silder .box{
 	width: 100%;
+	height: 100%;
 }
 .m-silder .box li{
 	position: absolute;
@@ -251,6 +252,7 @@ table {
 	left: 50%;
 	margin-left: -826px;
 }
+
 .m-silder .m-pointer{
 	position: absolute;
 	z-index: 9999;
