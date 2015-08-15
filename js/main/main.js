@@ -86,7 +86,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		function followBtnHandle(sta) {
 			switch (sta) {
 				case true:
-					util.AjaxUtil.getAjax("http://study.163.com/webDev/attention.htm",null,followSuccess);
+					util.AjaxUtil.getAjax("http://study.163.com/webDev/attention.htm", null, followSuccess);
 					break;
 				case false:
 					util.StyleUtil.hide(unfollow.parentNode);
@@ -100,9 +100,9 @@ require(["base", "util", "md5"], function(base, util, md5) {
 					break;
 			}
 		}
-		function followSuccess(sta){
-			if(sta==1)
-			{
+
+		function followSuccess(sta) {
+			if (sta == 1) {
 				util.StyleUtil.hide(follow.parentNode);
 				util.StyleUtil.show(unfollow.parentNode);
 				util.CookieUtil.set("followSuc", true);
@@ -117,93 +117,100 @@ require(["base", "util", "md5"], function(base, util, md5) {
 	(function() {
 		var bannerView = document.getElementById("bannerView");
 		var bannerList = bannerView.children;
-		var bannerBtnBox=document.getElementById("pointer")
+		var bannerBtnBox = document.getElementById("pointer")
 		var bannerBtnList = bannerBtnBox.children;
-		var PREV = 2;
+		var PREV=0;
 		var CURRENT = 0;
 		var NEXT = 1;
 		var NUM = bannerList.length;
-		var intervalID;
-
+		var intervalID = null;
+		var bannerID = null;
+		var btnID=null;
+		/* 初始化 */
+		banner();
+		util.DomUtil.addClass(bannerBtnList[CURRENT], "j-cur");
+		/* 按钮函数 */
 		function bannerBtn(callback) {
-			var btnStep = function() {
-				util.DomUtil.addClass(bannerBtnList[CURRENT], "j-cur");
-				util.DomUtil.removeClass(bannerBtnList[PREV], "j-cur");
+				util.DomUtil.removeClass(bannerBtnList[CURRENT], "j-cur");
+				util.DomUtil.addClass(bannerBtnList[NEXT], "j-cur");
+				counter();
 				if (callback) {
 					callback();
 				}
-			}
-			intervalID = setInterval(btnStep, 5000);
 		}
-
-		function banner() {
-			var dist = 1 * 10 / 500;
+		/* 淡入函数 */
+		function banner(callback) {
+			if (bannerID) {
+				clearInterval(bannerID);
+			}
+			var dist = 1 * 5 / 500;
 			bannerList[PREV].style.opacity = 0;
 			bannerList[CURRENT].style.opacity = 0;
 			var bannerStep = function() {
-				util.DomUtil.removeClass(bannerList[PREV], "j-banner-show");
-				util.DomUtil.addClass(bannerList[PREV], "j-banner-hide");
-				util.DomUtil.removeClass(bannerList[CURRENT], "j-banner-hide");
-				util.DomUtil.addClass(bannerList[CURRENT], "j-banner-show");
 				var currentOp = parseFloat(util.StyleUtil.get(bannerList[CURRENT], "opacity"));
 				currentOp += dist;
 				if (currentOp >= 1) {
 					bannerList[CURRENT].style.opacity = 1;
-					clearInterval(intervalID);
-					counter();
+					clearInterval(bannerID);
+					if (callback) {
+						callback();
+					}
 				} else {
 					bannerList[CURRENT].style.opacity = currentOp;
 				}
 			}
-			var intervalID = setInterval(bannerStep, 10);
+			bannerID = setInterval(bannerStep, 5);
 		}
-
+		/* 更新计数 */
 		function counter() {
 			PREV = CURRENT;
 			CURRENT = NEXT;
 			NEXT++;
 			NEXT = NEXT % NUM;
 		}
-		
-		banner();
-		bannerBtn(banner);
-		
+
+		function slider() {
+			if(intervalID){
+				clearInterval(intervalID);
+			}
+			var step=function(){
+				bannerBtn(banner);
+			}
+			intervalID=setInterval(step,5000)
+		}
 		util.EventUtil.addEvent(bannerView, "mouseover", viewOverHandle);
 		util.EventUtil.addEvent(bannerView, "mouseout", viewOutHandle);
 		function viewOverHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
-			if(target.nodeName=="IMG"){
-				bannerList[CURRENT].style.opacity = 1;
-				clearInterval(intervalID);
+			if (target.nodeName == "IMG") {
+				if (intervalID) {
+					clearInterval(intervalID);
+				}
+
 			}
 		}
-		function viewOutHandle(event){
+		function viewOutHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
-			if(target.nodeName=="IMG"){
-				bannerBtn(banner);
+			if (target.nodeName == "IMG") {
+				slider();
 			}
 		}
-		
 		util.EventUtil.addEvent(bannerBtnBox, "click", bannerBtnHandle);
-		function bannerBtnHandle(event){
+		function bannerBtnHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
-			if(target.nodeName=="LI");
-			{
-				var item=util.ArrayUtil.search(this.children,target);
-				PREV=CURRENT;
-				CURRENT=item;
-				NEXT=(CURRENT+1)%3;
-				clearInterval(intervalID);
-				banner();
+			if (target.nodeName == "LI"); {
+				var item = util.ArrayUtil.search(this.children, target);
+				if(intervalID){
+					clearInterval(intervalID);
+				}
+				NEXT = item;
 				bannerBtn(banner);
-				
+				slider();
 			}
 		}
-
-
-
+		slider();
 	})();
 })

@@ -14,6 +14,15 @@ define(["base"], function(base) {
 				str = str.slice(0, i) + str.charAt(i + 1).toUpperCase() + str.slice(i + 2);
 			}
 			return str;
+		},
+		register:function(num,amount){
+			var ret;
+			if(num-1>0){
+				ret=num-1
+			}else{
+				ret=(num-1+amount)%amount
+			}
+			return ret;
 		}
 	};
 	var CookieUtil = {
@@ -250,29 +259,29 @@ define(["base"], function(base) {
 			var intervelID = setInterval(step, intervel);
 			ele.interverID = intervelID;
 		},
-		fadeOver: function(ele, time, callback) {
-			if (ele.interverID) {
-				clearInterval(ele.interverID);
-			}
-			var dist = 1 * 25 / 500;
-
-			function step() {
-				var currentOp = StyleUtil.get(ele, "opacity");
-				currentOp += dist;
-				if (currentOp >= 1) {
-					ele.opacity = 1;
-					clearInterval(intervelID);
-					ele.intervalID = undefined;
-					if (callback) {
-						callback();
-					}
-				} else {
-					ele.opacity = currentOp;
-				}
-			}
-			var intervelID = setInterval(step, 25);
-			ele.intervalID = intervelID;
-		}
+//		fadeOver: function(ele, time, callback) {
+//			if () {
+//				clearInterval(ele.interverID);
+//			}
+//			var dist = 1 * 25 / 500;
+//
+//			function step() {
+//				var currentOp = StyleUtil.get(ele, "opacity");
+//				currentOp += dist;
+//				if (currentOp >= 1) {
+//					ele.opacity = 1;
+//					clearInterval(intervelID);
+//					ele.intervalID = undefined;
+//					if (callback) {
+//						callback();
+//					}
+//				} else {
+//					ele.opacity = currentOp;
+//				}
+//			}
+//			var intervelID = setInterval(step, 25);
+//			ele.intervalID = intervelID;
+//		}
 	};
 	var ArrayUtil = {
 		search:function(arr, item) {

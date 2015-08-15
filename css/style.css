@@ -247,6 +247,7 @@ table {
 	height: 100%;
 }
 .m-silder .box li{
+	opacity: 0;
 	position: absolute;
 	width: 100%;
 	left: 50%;
@@ -864,13 +865,6 @@ table {
 .j-show{
 	display: block;
 }
-.j-banner-show{
-	z-index: 1;
-	opacity: 0;
-}
-.j-banner-hide{
-	z-index: -9999;
-	opacity: 0;
-}
+
 
 
