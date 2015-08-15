@@ -86,12 +86,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		function followBtnHandle(sta) {
 			switch (sta) {
 				case true:
-					util.StyleUtil.hide(follow.parentNode);
-					util.StyleUtil.show(unfollow.parentNode);
-					util.CookieUtil.set("followSuc", true);
-					var oldfansNum = parseInt(fansNum.innerText);
-					var newfansNum = oldfansNum + 1;
-					fansNum.innerText = newfansNum;
+					util.AjaxUtil.getAjax("http://study.163.com/webDev/attention.htm",null,followSuccess);
 					break;
 				case false:
 					util.StyleUtil.hide(unfollow.parentNode);
@@ -103,6 +98,17 @@ require(["base", "util", "md5"], function(base, util, md5) {
 					break;
 				default:
 					break;
+			}
+		}
+		function followSuccess(sta){
+			if(sta==1)
+			{
+				util.StyleUtil.hide(follow.parentNode);
+				util.StyleUtil.show(unfollow.parentNode);
+				util.CookieUtil.set("followSuc", true);
+				var oldfansNum = parseInt(fansNum.innerText);
+				var newfansNum = oldfansNum + 1;
+				fansNum.innerText = newfansNum;
 			}
 		}
 	})();
