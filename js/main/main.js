@@ -231,7 +231,9 @@ require(["base", "util", "md5"], function(base, util, md5) {
 			this.category = obj.categoryName;
 			this.description = obj.description;
 			this.cardDiv = document.createElement("div");
-			this.cardDiv.className = "m-card j-relative";
+			this.cardDiv.className = "m-card";
+			this.bigCardDiv = document.createElement("div");
+			this.bigCardDiv.className = "m-bigcard";
 		}
 		Card.prototype = {
 			construtor: Card,
@@ -263,8 +265,6 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				parent.appendChild(this.cardDiv);
 			},
 			hover: function() {
-				var bigCardDiv = document.createElement("div");
-				bigCardDiv.className = "m-bigcard";
 				var topDiv = document.createElement("div");
 				topDiv.className = "top";
 				var img = document.createElement("img");
@@ -276,7 +276,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				var countDiv = document.createElement("div");
 				countDiv.className = "count";
 				var sprite2 = document.createElement("div");
-				sprite1.className = "u-sprite";
+				sprite2.className = "u-sprite";
 				var countp = document.createElement("p");
 				countp.innerText = this.learnerCount + "人在学";
 				var provP = document.createElement("p");
@@ -296,9 +296,14 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				detailDiv.appendChild(categoryP);
 				topDiv.appendChild(img);
 				topDiv.appendChild(detailDiv);
-				bigCardDiv.appendChild(topDiv);
-				bigCardDiv.appendChild(desP);
-				this.cardDiv.appendChild(bigCardDiv);
+				this.bigCardDiv.appendChild(topDiv);
+				this.bigCardDiv.appendChild(desP);
+				util.DomUtil.addClass(this.cardDiv,"j-relative");
+				this.cardDiv.appendChild(this.bigCardDiv);
+			},
+			out:function(){
+				this.cardDiv.removeChild(this.bigCardDiv);
+				util.DomUtil.removeClass(this.cardDiv,"j-relative");
 			}
 		}
 		var tablist = document.querySelector(".m-tab");
@@ -310,8 +315,10 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		var curIndex = -1;
 		var cardBox = document.getElementById("cardBox");
 		var pagerbox = document.getElementById("pager");
-		util.EventUtil.addEvent(tablist,"click",contentChange);
-		function contentChange(event) {
+		util.EventUtil.addEvent(tablist,"click",contentChangeHandle);
+//		util.EventUtil.addEvent(cardBox,"mouseover",cardOverHandle)
+//		util.EventUtil.addEvent(cardBox,"mouseoout",cardOutHandle)
+		function contentChangeHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
 			if (target.nodeName == "SPAN") {
@@ -338,9 +345,38 @@ require(["base", "util", "md5"], function(base, util, md5) {
 						{
 							cardList[i]=new Card(contentList[i]);
 							cardList[i].init(cardBox);
+//							cardList[i].cardDiv.onmousemove=function(){
+//								alert(1);
+//							}
+//							cardList[i].cardDiv.onmousemove=(function(){
+//								cardList[i].hover
+//							})(cardList[i].bigCardDiv);
+//							
+							cardList[i].cardDiv.onmousemove=(function(card){
+								return function(){
+									card.hover();
+								}
+							})(cardList[i])
+							cardList[i].cardDiv.onmouseout=(function(card){
+								return function(){
+									card.out();
+								}
+							})(cardList[i])
 						}
 					}
 				}
+			}
+		}
+		function cardOverHandle(){
+			event = util.EventUtil.getEvent(event);
+			var target = util.EventUtil.getTarget(event);
+			if(util.DomUtil.hasClass(target,"m-card")){
+			}
+		}
+		function cardOutHandle(){
+			event = util.EventUtil.getEvent(event);
+			var target = util.EventUtil.getTarget(event);
+			if(util.DomUtil.hasClass(target,"m-card")){
 			}
 		}
 		design.click();

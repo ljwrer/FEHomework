@@ -815,11 +815,11 @@ table {
 .j-relative{
 	position: relative;
 	z-index: 1;
-	overflow: visible;
+	/*overflow: visible;*/
 }
 .m-bigcard{
 	position: absolute;
-	z-index: 999;
+	z-index: 9999;
 	left: 0;
 	top: 0;
 	width: 470px;
