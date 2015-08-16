@@ -233,7 +233,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 			this.cardDiv = document.createElement("div");
 			this.cardDiv.className = "m-card";
 			this.bigCardDiv = document.createElement("div");
-			this.bigCardDiv.className = "m-bigcard";
+			this.bigCardDiv.className = "m-bigcard j-hide";
 		}
 		Card.prototype = {
 			construtor: Card,
@@ -263,8 +263,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				this.cardDiv.appendChild(countDiv);
 				this.cardDiv.appendChild(priceSpan);
 				parent.appendChild(this.cardDiv);
-			},
-			hover: function() {
+				
 				var topDiv = document.createElement("div");
 				topDiv.className = "top";
 				var img = document.createElement("img");
@@ -298,12 +297,15 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				topDiv.appendChild(detailDiv);
 				this.bigCardDiv.appendChild(topDiv);
 				this.bigCardDiv.appendChild(desP);
-				util.DomUtil.addClass(this.cardDiv,"j-relative");
 				this.cardDiv.appendChild(this.bigCardDiv);
 			},
+			hover: function() {
+				util.DomUtil.addClass(this.cardDiv,"j-relative");
+				util.StyleUtil.show(this.bigCardDiv);
+			},
 			out:function(){
-				this.cardDiv.removeChild(this.bigCardDiv);
 				util.DomUtil.removeClass(this.cardDiv,"j-relative");
+				util.StyleUtil.hide(this.bigCardDiv);
 			}
 		}
 		var tablist = document.querySelector(".m-tab");
@@ -345,13 +347,6 @@ require(["base", "util", "md5"], function(base, util, md5) {
 						{
 							cardList[i]=new Card(contentList[i]);
 							cardList[i].init(cardBox);
-//							cardList[i].cardDiv.onmousemove=function(){
-//								alert(1);
-//							}
-//							cardList[i].cardDiv.onmousemove=(function(){
-//								cardList[i].hover
-//							})(cardList[i].bigCardDiv);
-//							
 							cardList[i].cardDiv.onmousemove=(function(card){
 								return function(){
 									card.hover();
