@@ -382,8 +382,19 @@ table {
 	overflow: hidden;
 }
 .g-main .m-tab{
+	float: left;
 	margin-bottom: 29px;	
 	overflow: hidden;
+	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
+	
+}
+.g-main .m-tab:after{
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
 }
 .m-tab span{
 	display: inline-block;
@@ -420,7 +431,7 @@ table {
 	height: 124px;
 	margin: 1px 1px 0;
 }
-.m-card .description{
+.m-card .name{
 	padding:10px 11px 0 5px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -437,11 +448,11 @@ table {
 	max-width: 225px;
 }
 .m-card .m-learnercount{
-	width: 38px;
+	float: left;
 	height: 16px;
 	margin: 10px 0 0 5px;
 	border: 1px solid #dddddd;
-	border-radius: 1px;
+	border-radius: 2px;
 	font: 8px "microsoft yahei";
 	color: #999999;
 	max-width: 225px;
@@ -456,8 +467,10 @@ table {
 .m-card .m-learnercount span{
 	display: inline-block;
 	line-height: 16px;
+	margin-right: 3px;
 }
 .m-card .price{
+	clear: both;
 	display: block;
 	padding: 10px 0 10px 5px;
 	font:12px/12px "microsoft yahei";
@@ -804,7 +817,7 @@ table {
 	z-index: 1;
 	overflow: visible;
 }
-.j-bigcard{
+.m-bigcard{
 	position: absolute;
 	z-index: 999;
 	left: 0;
@@ -815,43 +828,43 @@ table {
 	border: 2px solid #d6d6d6;
 	border-radius: 2px;
 }
-.j-bigcard .top{
+.m-bigcard .top{
 	height: 124px;
 	padding: 19px 19px 20px;
 	background: #ffffff;
 }
-.j-bigcard img{
+.m-bigcard img{
 	float: left;
 	margin-right: 19px;
 }
-.j-bigcard .detail{
+.m-bigcard .detail{
 	overflow: hidden;
 }
-.j-bigcard .detail p{
+.m-bigcard .detail p{
 	font: 12px/12px "microsoft yahei";
 	color: #666666;
 }
-.j-bigcard .detail h2{
+.m-bigcard .detail h2{
 	font: 18px/18px "microsoft yahei";
 	color: #333333;
 }
-.j-bigcard .count{
+.m-bigcard .count{
 	margin-top: 20px;
 }
-.j-bigcard .detail .u-sprite{
+.m-bigcard .detail .u-sprite{
 	float: left;
 	margin:1px 6px 0 0;
 	background: url(../img/sprite.png) no-repeat -219px 0;
 	width: 9px;
 	height: 10px;
 }
-.j-bigcard .prov{
+.m-bigcard .prov{
 	padding-top: 12px;
 }
-.j-bigcard .category{
+.m-bigcard .category{
 	padding-top: 8px;
 }
-.j-bigcard .des{
+.m-bigcard .des{
 	height: 72px;
 	padding: 12px 25px 3px 19px;
 	overflow: hidden;

@@ -119,13 +119,13 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		var bannerList = bannerView.children;
 		var bannerBtnBox = document.getElementById("pointer")
 		var bannerBtnList = bannerBtnBox.children;
-		var PREV=0;
+		var PREV = 0;
 		var CURRENT = 0;
 		var NEXT = 1;
-		var NUM = bannerList.length;
+		var NUM = 3;
 		var intervalID = null;
 		var bannerID = null;
-		var btnID=null;
+		var btnID = null;
 		/* 初始化 */
 		banner();
 		util.DomUtil.addClass(bannerBtnList[CURRENT], "j-cur");
@@ -137,31 +137,33 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				if (callback) {
 					callback();
 				}
-		}
-		/* 淡入函数 */
+			}
+			/* 淡入函数 */
+
 		function banner(callback) {
-			if (bannerID) {
-				clearInterval(bannerID);
-			}
-			var dist = 1 * 5 / 500;
-			bannerList[PREV].style.opacity = 0;
-			bannerList[CURRENT].style.opacity = 0;
-			var bannerStep = function() {
-				var currentOp = parseFloat(util.StyleUtil.get(bannerList[CURRENT], "opacity"));
-				currentOp += dist;
-				if (currentOp >= 1) {
-					bannerList[CURRENT].style.opacity = 1;
+				if (bannerID) {
 					clearInterval(bannerID);
-					if (callback) {
-						callback();
-					}
-				} else {
-					bannerList[CURRENT].style.opacity = currentOp;
 				}
+				var dist = 1 * 5 / 500;
+				bannerList[PREV].style.opacity = 0;
+				bannerList[CURRENT].style.opacity = 0;
+				var bannerStep = function() {
+					var currentOp = parseFloat(util.StyleUtil.get(bannerList[CURRENT], "opacity"));
+					currentOp += dist;
+					if (currentOp >= 1) {
+						bannerList[CURRENT].style.opacity = 1;
+						clearInterval(bannerID);
+						if (callback) {
+							callback();
+						}
+					} else {
+						bannerList[CURRENT].style.opacity = currentOp;
+					}
+				}
+				bannerID = setInterval(bannerStep, 5);
 			}
-			bannerID = setInterval(bannerStep, 5);
-		}
-		/* 更新计数 */
+			/* 更新计数 */
+
 		function counter() {
 			PREV = CURRENT;
 			CURRENT = NEXT;
@@ -170,16 +172,17 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		}
 
 		function slider() {
-			if(intervalID){
+			if (intervalID) {
 				clearInterval(intervalID);
 			}
-			var step=function(){
+			var step = function() {
 				bannerBtn(banner);
 			}
-			intervalID=setInterval(step,5000)
+			intervalID = setInterval(step, 5000)
 		}
 		util.EventUtil.addEvent(bannerView, "mouseover", viewOverHandle);
 		util.EventUtil.addEvent(bannerView, "mouseout", viewOutHandle);
+
 		function viewOverHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
@@ -190,6 +193,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 
 			}
 		}
+
 		function viewOutHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
@@ -198,12 +202,14 @@ require(["base", "util", "md5"], function(base, util, md5) {
 			}
 		}
 		util.EventUtil.addEvent(bannerBtnBox, "click", bannerBtnHandle);
+
 		function bannerBtnHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
 			if (target.nodeName == "LI"); {
-				var item = util.ArrayUtil.search(this.children, target);
-				if(intervalID){
+				var item = util.ArrayUtil.search(bannerBtnBox.children, target);
+				if(item==-1) return;
+				if (intervalID) {
 					clearInterval(intervalID);
 				}
 				NEXT = item;
@@ -212,5 +218,137 @@ require(["base", "util", "md5"], function(base, util, md5) {
 			}
 		}
 		slider();
+	})();
+
+	/* 左侧内容区 tab切换  */
+	(function() {
+		function Card(obj) {
+			this.imgsrc = obj.middlePhotoUrl;
+			this.name = obj.name;
+			this.provider = obj.provider;
+			this.learnerCount = obj.learnerCount;
+			this.price = obj.price;
+			this.category = obj.categoryName;
+			this.description = obj.description;
+			this.cardDiv = document.createElement("div");
+			this.cardDiv.className = "m-card j-relative";
+		}
+		Card.prototype = {
+			construtor: Card,
+			init: function(parent) {
+				var img = document.createElement("img");
+				img.src = this.imgsrc;
+				var namep = document.createElement("p");
+				namep.className = "name";
+				namep.innerText = this.name;
+				var providerp = document.createElement("p");
+				providerp.className = "provider";
+				providerp.innerText = this.provider;
+				var countDiv = document.createElement("div");
+				countDiv.className = "m-learnercount";
+				var sprite1 = document.createElement("div");
+				sprite1.className = "u-sprite";
+				var countSpan = document.createElement("span");
+				countSpan.innerText = this.learnerCount;
+				var priceSpan = document.createElement("span");
+				priceSpan.className="price"
+				priceSpan.innerText = this.price==0?"免费":"￥"+this.price;
+				countDiv.appendChild(sprite1);
+				countDiv.appendChild(countSpan);
+				this.cardDiv.appendChild(img);
+				this.cardDiv.appendChild(namep);
+				this.cardDiv.appendChild(providerp);
+				this.cardDiv.appendChild(countDiv);
+				this.cardDiv.appendChild(priceSpan);
+				parent.appendChild(this.cardDiv);
+			},
+			hover: function() {
+				var bigCardDiv = document.createElement("div");
+				bigCardDiv.className = "m-bigcard";
+				var topDiv = document.createElement("div");
+				topDiv.className = "top";
+				var img = document.createElement("img");
+				img.src = this.imgsrc;
+				var detailDiv = document.createElement("div");
+				topDiv.className = "detail";
+				var categoryH = document.createElement("h2");
+				categoryH.innerText = this.category;
+				var countDiv = document.createElement("div");
+				countDiv.className = "count";
+				var sprite2 = document.createElement("div");
+				sprite1.className = "u-sprite";
+				var countp = document.createElement("p");
+				countp.innerText = this.learnerCount + "人在学";
+				var provP = document.createElement("p");
+				provP.className = "prov";
+				provP.innerText = "发布者：" + this.provider;
+				var categoryP = document.createElement("p");
+				provP.className = "category";
+				provP.innerText = "分类：" + this.category;
+				var desP = document.createElement("p");
+				desP.className = "des";
+				desP.innerText = this.description;
+				countDiv.appendChild(sprite2);
+				countDiv.appendChild(countp);
+				detailDiv.appendChild(categoryH);
+				detailDiv.appendChild(countDiv);
+				detailDiv.appendChild(provP);
+				detailDiv.appendChild(categoryP);
+				topDiv.appendChild(img);
+				topDiv.appendChild(detailDiv);
+				bigCardDiv.appendChild(topDiv);
+				bigCardDiv.appendChild(desP);
+				this.cardDiv.appendChild(bigCardDiv);
+			}
+		}
+		var tablist = document.querySelector(".m-tab");
+		var design = document.getElementById("design");
+		var program = document.getElementById("program");
+		var tabArray = [];
+		tabArray.push(design);
+		tabArray.push(program);
+		var curIndex = -1;
+		var cardBox = document.getElementById("cardBox");
+		var pagerbox = document.getElementById("pager");
+		util.EventUtil.addEvent(tablist,"click",contentChange);
+		function contentChange(event) {
+			event = util.EventUtil.getEvent(event);
+			var target = util.EventUtil.getTarget(event);
+			if (target.nodeName == "SPAN") {
+				var tarIndex = (util.ArrayUtil.search(tabArray, target));
+				if (curIndex != tarIndex) {
+					curIndex = tarIndex;
+					util.DomUtil.removeClass(tabArray[1 - tarIndex], "j-tabed")
+					util.DomUtil.addClass(tabArray[tarIndex], "j-tabed")
+					cardBox.innerHTML = "";
+					var url = "http://study.163.com/webDev/couresByCategory.htm";
+					var options = {};
+					var pageNo = parseInt(pagerbox.querySelector(".f-cur").innerText);
+					var psize = 20;
+					var type = 10 + tarIndex * 10;
+					options.pageNo = pageNo;
+					options.psize = psize;
+					options.type = type;
+					util.AjaxUtil.getAjax(url, options, AjaxHandle);
+					function AjaxHandle(text) {
+						var content = JSON.parse(text);
+						var contentList=content.list;
+						var cardList=[];
+						for(var i=0,len=contentList.length;i<len;i++)
+						{
+							cardList[i]=new Card(contentList[i]);
+							cardList[i].init(cardBox);
+						}
+					}
+				}
+			}
+		}
+		design.click();
+		
+
+
+
+
+
 	})();
 })
