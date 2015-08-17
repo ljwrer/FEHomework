@@ -208,7 +208,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 			var target = util.EventUtil.getTarget(event);
 			if (target.nodeName == "LI"); {
 				var item = util.ArrayUtil.search(bannerBtnBox.children, target);
-				if(item==-1) return;
+				if (item == -1) return;
 				if (intervalID) {
 					clearInterval(intervalID);
 				}
@@ -253,8 +253,8 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				var countSpan = document.createElement("span");
 				countSpan.innerText = this.learnerCount;
 				var priceSpan = document.createElement("span");
-				priceSpan.className="price"
-				priceSpan.innerText = this.price==0?"免费":"￥"+this.price;
+				priceSpan.className = "price"
+				priceSpan.innerText = this.price == 0 ? "免费" : "￥" + this.price;
 				countDiv.appendChild(sprite1);
 				countDiv.appendChild(countSpan);
 				this.cardDiv.appendChild(img);
@@ -263,7 +263,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				this.cardDiv.appendChild(countDiv);
 				this.cardDiv.appendChild(priceSpan);
 				parent.appendChild(this.cardDiv);
-				
+
 				var topDiv = document.createElement("div");
 				topDiv.className = "top";
 				var img = document.createElement("img");
@@ -300,11 +300,11 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				this.cardDiv.appendChild(this.bigCardDiv);
 			},
 			hover: function() {
-				util.DomUtil.addClass(this.cardDiv,"j-relative");
+				util.DomUtil.addClass(this.cardDiv, "j-relative");
 				util.StyleUtil.show(this.bigCardDiv);
 			},
-			out:function(){
-				util.DomUtil.removeClass(this.cardDiv,"j-relative");
+			out: function() {
+				util.DomUtil.removeClass(this.cardDiv, "j-relative");
 				util.StyleUtil.hide(this.bigCardDiv);
 			}
 		}
@@ -315,67 +315,96 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		tabArray.push(design);
 		tabArray.push(program);
 		var curIndex = -1;
+		var tarIndex=-1;
+		var pageCurIndex = 1;
+		var pageTarIndex = 1;
 		var cardBox = document.getElementById("cardBox");
 		var pagerbox = document.getElementById("pager");
-		util.EventUtil.addEvent(tablist,"click",contentChangeHandle);
-//		util.EventUtil.addEvent(cardBox,"mouseover",cardOverHandle)
-//		util.EventUtil.addEvent(cardBox,"mouseoout",cardOutHandle)
+		var pagerArray = [];
+		for (var i = 0, len = pagerbox.children.length; i < len; i++) {
+			pagerArray[i] = pagerbox.children[i];
+		}
+		util.EventUtil.addEvent(tablist, "click", contentChangeHandle);
+		util.EventUtil.addEvent(pagerbox, "click", pagerChangeHandle);
+
+
 		function contentChangeHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
 			if (target.nodeName == "SPAN") {
-				var tarIndex = (util.ArrayUtil.search(tabArray, target));
+				tarIndex = (util.ArrayUtil.search(tabArray, target));
 				if (curIndex != tarIndex) {
 					curIndex = tarIndex;
 					util.DomUtil.removeClass(tabArray[1 - tarIndex], "j-tabed")
 					util.DomUtil.addClass(tabArray[tarIndex], "j-tabed")
-					cardBox.innerHTML = "";
-					var url = "http://study.163.com/webDev/couresByCategory.htm";
-					var options = {};
-					var pageNo = parseInt(pagerbox.querySelector(".f-cur").innerText);
-					var psize = 20;
-					var type = 10 + tarIndex * 10;
-					options.pageNo = pageNo;
-					options.psize = psize;
-					options.type = type;
-					util.AjaxUtil.getAjax(url, options, AjaxHandle);
-					function AjaxHandle(text) {
-						var content = JSON.parse(text);
-						var contentList=content.list;
-						var cardList=[];
-						for(var i=0,len=contentList.length;i<len;i++)
-						{
-							cardList[i]=new Card(contentList[i]);
-							cardList[i].init(cardBox);
-							cardList[i].cardDiv.onmousemove=(function(card){
-								return function(){
-									card.hover();
-								}
-							})(cardList[i])
-							cardList[i].cardDiv.onmouseout=(function(card){
-								return function(){
-									card.out();
-								}
-							})(cardList[i])
-						}
-					}
+					requestData();
 				}
 			}
 		}
-		function cardOverHandle(){
+
+		function pagerChangeHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
-			if(util.DomUtil.hasClass(target,"m-card")){
+			if (target.nodeName == "LI") {
+				var pageTarIndex = util.ArrayUtil.search(pagerArray, target)
+				
+//				if (curIndex != tarIndex) {
+//					curIndex = tarIndex;
+//					util.DomUtil.removeClass(tabArray[1 - tarIndex], "j-tabed")
+//					util.DomUtil.addClass(tabArray[tarIndex], "j-tabed")
+//					requestData();
+//				}
+			}
+		}	
+			
+		function AjaxHandle(text) {
+			var content = JSON.parse(text);
+			//						alert(content.totalCount+" "+content.totalPage);
+			var contentList = content.list;
+			var cardList = [];
+			for (var i = 0, len = contentList.length; i < len; i++) {
+				cardList[i] = new Card(contentList[i]);
+				cardList[i].init(cardBox);
+				cardList[i].cardDiv.onmousemove = (function(card) {
+					return function() {
+						card.hover();
+					}
+				})(cardList[i])
+				cardList[i].cardDiv.onmouseout = (function(card) {
+					return function() {
+						card.out();
+					}
+				})(cardList[i])
 			}
 		}
-		function cardOutHandle(){
+
+		function requestData() {
+			cardBox.innerHTML = "";
+			var url = "http://study.163.com/webDev/couresByCategory.htm";
+			var options = {};
+			var pageNo = parseInt(pagerbox.querySelector(".f-cur").innerText);
+			var psize = document.body.clientWidth >= 1205 ? 20 : 15;
+			var type = 10 + tarIndex * 10;
+			options.pageNo = pageNo;
+			options.psize = psize;
+			options.type = type;
+			util.AjaxUtil.getAjax(url, options, AjaxHandle);
+		}
+
+
+		function cardOverHandle() {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
-			if(util.DomUtil.hasClass(target,"m-card")){
-			}
+			if (util.DomUtil.hasClass(target, "m-card")) {}
+		}
+
+		function cardOutHandle() {
+			event = util.EventUtil.getEvent(event);
+			var target = util.EventUtil.getTarget(event);
+			if (util.DomUtil.hasClass(target, "m-card")) {}
 		}
 		design.click();
-		
+
 
 
 

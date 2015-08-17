@@ -367,7 +367,11 @@ table {
 /*------------------------------------------*/
 .g-contnet{
 	width: 100%;
-	height: 1551px;
+	/*height: 1551px;*/
+	/*margin-bottom: -1000px;
+	padding-bottom: 1000px;*/
+	padding-bottom: 100px;
+    margin-bottom: -100px;
 	background: #f8f8f8;
 	overflow: hidden;
 }
@@ -375,16 +379,22 @@ table {
 	padding-top: 81px;
 	width: 1205px;
 	margin: 0 auto;
-	overflow: hidden;
+	/*overflow: hidden;*/
+}
+.g-main-fix{
+	float: left;
+	width: 100%;
 }
 .g-main{
 	/*float: left;*/
-	overflow: hidden;
+	/*overflow: hidden;*/
+	margin-right: 223px;
 }
 .g-main .m-tab{
-	float: left;
+	/*float: left;*/
+	display: inline-block;
 	margin-bottom: 29px;	
-	overflow: hidden;
+	/*overflow: hidden;*/
 	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
 	
 }
@@ -411,11 +421,17 @@ table {
 .m-card-box{
 	font-size: 0;
 	/*width: 750px;*/
-	width: 1000px;
-	height: 1240px;
-	overflow: hidden;
+	/*width: 1000px;*/
+	/*height: 1240px;*/
+	/*padding-right: 250px;
+	margin-right: -250px;
+	padding-bottom: 110px;
+	margin-bottom: -100px;*/
+	padding-bottom: 10px;
+	
 }
 .m-card{
+	/*float: left;*/
 	display: inline-block;
 	width: 225px;
 	height: 228px;
@@ -480,6 +496,7 @@ table {
 .g-main .m-pager{
 	float: right;
 	margin-right: 15px;
+	padding-bottom: 120px;
 }
 .m-pager{
 	font-size: 0;
@@ -507,9 +524,11 @@ table {
 /* --------------------------------------- */
 .g-aside{
 	float: right;
+	position: relative;
 	margin-top: 3px;
-	height: 1028px;
+	/*height: 1028px;*/
 	width: 223px;
+	margin-left:-223px
 }
 .g-aside .m-org{
 	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
@@ -803,9 +822,9 @@ table {
 	.g-content-box{
 		width: 980px;
 	}
-	.m-card-box{
+	/*.m-card-box{
 		width: 750px;
-	}
+	}*/
 	.g-contnet .g-main .m-pager{
 		margin-right: 38px;
 	}
@@ -814,16 +833,15 @@ table {
 /* *********************************** */
 .j-relative{
 	position: relative;
-	z-index: 1;
+	/*z-index: 10;*/
 	/*overflow: visible;*/
 }
 .m-bigcard{
 	position: absolute;
 	z-index: 9999;
 	left: 0;
-	top: 0;
+	top: 0px;
 	width: 470px;
-	height: 250px;
 	background: #f8f8f8;;
 	border: 2px solid #d6d6d6;
 	border-radius: 2px;
@@ -865,9 +883,9 @@ table {
 	padding-top: 8px;
 }
 .m-bigcard .des{
-	height: 72px;
-	padding: 12px 25px 3px 19px;
-	overflow: hidden;
+	/*height: 72px;*/
+	padding: 12px 25px 27px 19px;
+	/*overflow: hidden;*/
 	font: 14px/24px "microsoft yahei";
 	color: #666666;
 }
