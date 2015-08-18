@@ -459,4 +459,85 @@ require(["base", "util", "md5"], function(base, util, md5) {
 
 
 	})();
+
+	/* 右侧"机构介绍"中的视频介绍 */
+	(function(){
+		var videoOpenBtn=document.getElementById("videoBtn");
+		var videoCloseBtn=document.getElementById("videoCloseBtn");
+		var videoMask=document.getElementById("videoMask");
+		var videoWindow=document.getElementById("videoWindow");
+		videoOpenBtn.onclick=function(){
+			util.StyleUtil.show(videoMask);
+			videoWindow.play();
+		}
+		videoCloseBtn.onclick=function(){
+			videoWindow.pause();
+			util.StyleUtil.hide(videoMask);
+		}
+	})();
+	
+	/* 右侧"热门推荐" */
+	(function(){
+		function MiniCard(obj){
+			this.imgsrc=obj.smallPhotoUrl;
+			this.name=obj.name;
+			this.learnerCount=obj.learnerCount;
+		}
+		MiniCard.prototype={
+			constructor:MiniCard,
+			init:function(parent){
+				var minicardDiv=document.createElement("div");
+				minicardDiv.className="m-minicard clear-fix";
+				minicardDiv.innerHTML='<img src="'
+										+this.imgsrc
+										+'" /><div class="detail clear-fix"><p>'
+										+this.name
+										+'</p><div class="count clear-fix"><div class="u-sprite"></div><span>'
+										+this.learnerCount
+										+'</span></div></div>';
+				parent.appendChild(minicardDiv);
+			}
+		};
+		var minicardBox=document.getElementById("minicardBox");
+		var url="http://study.163.com/webDev/hotcouresByCategory.htm";
+		var options=null;
+		var minicardList=[];
+		util.AjaxUtil.getAjax(url,options,miniCardAjaxHandle);
+		function miniCardAjaxHandle(text){
+			minicardBox.innerHTML="";
+			var contentArray=JSON.parse(text);
+			for(var i=0,len=contentArray.length;i<len;i++){
+				minicardList[i]=new MiniCard(contentArray[i]);
+				minicardList[i].init(minicardBox);
+			}
+		}
+		var minicardBoxView=document.querySelector(".m-ranklist-view");
+		var reg=1;
+		var regc=1;
+		var step=function(){
+			var tarY=-reg*70;
+			if(reg==10||reg==0){
+				regc=-regc;
+			}
+			reg+=regc;
+			util.MoveUtil.moveElement(minicardBox,0,tarY,10);
+		}
+		setInterval(step,5000);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	})();
 })

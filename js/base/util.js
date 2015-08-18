@@ -233,8 +233,8 @@ define(["base"], function(base) {
 			}
 
 			function step() {
-				var currentX = parseInt(window.getComputedStyle(ele).left);
-				var currentY = parseInt(window.getComputedStyle(ele).top);
+				var currentX = parseInt(StyleUtil.get(ele,"left"));
+				var currentY = parseInt(StyleUtil.get(ele,"top"));
 				var dist = 0
 				if (currentX === finalX && currentY === finalY) {
 					clearInterval(intervelID);
@@ -247,7 +247,7 @@ define(["base"], function(base) {
 					currentX -= dist;
 				}
 				if (currentY < finalY) {
-					dist = Math.ceil((finalX - currentX) / 10);
+					dist = Math.ceil((finalY - currentY) / 10);
 					currentY += dist;
 				} else if (currentY > finalY) {
 					dist = Math.ceil((currentY - finalY) / 10);
@@ -258,7 +258,7 @@ define(["base"], function(base) {
 			}
 			var intervelID = setInterval(step, intervel);
 			ele.interverID = intervelID;
-		},
+		}
 //		fadeOver: function(ele, time, callback) {
 //			if () {
 //				clearInterval(ele.interverID);

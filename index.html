@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8" />
-		<title>前端培训大作业</title>
+		<title>SPA</title>
 		<link rel="stylesheet" href="css/style.css" />
 		<script type="text/javascript" src="js/lib/require.js" data-main="js/main/main.js"></script>
 	</head>
@@ -126,7 +126,7 @@
 							<span id="design">产品设计</span><!--
 					 --><span id="program">编程语言</span>
 						</div>
-						<div class="m-card-box" id="cardBox">
+						<div class="m-card-box" id="cardBox"><!--
 							<div class="m-card j-relative">
 								<img src="img/course.jpg" />
 								<p class="name">混音全揭秘 舞曲实战篇 揭秘音乐揭秘混音全揭秘 舞曲实战篇 揭秘音乐揭秘混音全揭秘 舞曲实战篇 揭秘音乐揭秘混音全揭秘 舞曲实战篇 揭秘音乐揭秘</p>
@@ -430,7 +430,7 @@
 							<div class="m-card"></div>
 							<div class="m-card"></div>
 							<div class="m-card"></div>
-							<div class="m-card"></div>
+							<div class="m-card"></div>-->
 						</div>
 						<div class="m-pager">
 							<ul id="pager">
@@ -457,7 +457,9 @@
 					</div>
 					<div class="m-rank">
 						<h2>最热排行</h2>
-						<div class="m-ranklist">
+						<div class="m-ranklist-view">
+						<div class="m-ranklist" id="minicardBox">
+							<!--
 							<div class="m-minicard clear-fix">
 								<img src="img/coursemin.jpg" />
 								<div class="detail clear-fix">
@@ -578,6 +580,8 @@
 									</div>
 								</div>
 							</div>
+							-->
+						</div>
 						</div>
 					</div>
 				</div>
@@ -638,13 +642,13 @@
 				</form>
 			</div>
 		</div>
-		<div class="g-mask g-mask2 j-hide">
+		<div class="g-mask g-mask2 j-hide" id="videoMask">
 			<div class="m-video">
-				<div class="u-sprite">
+				<div class="u-sprite" id="videoCloseBtn">
 
 				</div>
 				<h2>请观看下面的视频</h2>
-				<video width="889" height="567" controls="controls">
+				<video width="889" height="567" controls="controls" id="videoWindow">
 					<source src="http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_sh
 d.mp4" type="video/mp4"></source>
 
