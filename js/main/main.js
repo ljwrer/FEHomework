@@ -269,9 +269,9 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				var img = document.createElement("img");
 				img.src = this.imgsrc;
 				var detailDiv = document.createElement("div");
-				topDiv.className = "detail";
+				detailDiv.className = "detail";
 				var categoryH = document.createElement("h2");
-				categoryH.innerText = this.category;
+				categoryH.innerText = this.name;
 				var countDiv = document.createElement("div");
 				countDiv.className = "count";
 				var sprite2 = document.createElement("div");
@@ -282,8 +282,8 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				provP.className = "prov";
 				provP.innerText = "发布者：" + this.provider;
 				var categoryP = document.createElement("p");
-				provP.className = "category";
-				provP.innerText = "分类：" + this.category;
+				categoryP.className = "category";
+				categoryP.innerText = "分类：" + this.category;
 				var desP = document.createElement("p");
 				desP.className = "des";
 				desP.innerText = this.description;
@@ -316,8 +316,15 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		tabArray.push(program);
 		var curIndex = -1;
 		var tarIndex=-1;
+		var pageNum=1;
 		var pageCurIndex = 1;
 		var pageTarIndex = 1;
+		var pageIndex=[];
+		for(var i=1;i<9;i++){
+			pageIndex[i]=i;
+		}
+		var totalCount;
+		var totalPage;
 		var cardBox = document.getElementById("cardBox");
 		var pagerbox = document.getElementById("pager");
 		var pagerArray = [];
@@ -345,21 +352,60 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		function pagerChangeHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
-			if (target.nodeName == "LI") {
+			if (target.nodeName == "LI"&&target.innerText!="") {
 				var pageTarIndex = util.ArrayUtil.search(pagerArray, target)
-				
-//				if (curIndex != tarIndex) {
-//					curIndex = tarIndex;
-//					util.DomUtil.removeClass(tabArray[1 - tarIndex], "j-tabed")
-//					util.DomUtil.addClass(tabArray[tarIndex], "j-tabed")
-//					requestData();
-//				}
+				if(pageCurIndex!=pageTarIndex)
+				{
+					switch(pageTarIndex){
+						case 0:
+						if(pageNum>1){
+							if(pageNum%8==1)
+							{
+								for(var i=1;i<=8;i++)
+								{
+									pagerArray[i].innerText=parseInt(pagerArray[i].innerText)-8;
+									pagerArray[i].style.display="inline-block";
+								}
+							}
+							pageNum--;
+							pageTarIndex=pageNum%8?pageNum%8:8;
+						}
+						break;
+						case 9:
+						if(pageNum<totalPage){
+							if(pageNum%8==0&&pageNum<totalPage){
+								for(var i=1;i<=8;i++)
+								{
+									pagerArray[i].innerText=parseInt(pagerArray[i].innerText)+8;
+									if(parseInt(pagerArray[i].innerText)>totalPage)
+									{
+										pagerArray[i].style.display="none";
+									}
+								}
+							}
+							pageNum++;
+							pageTarIndex=pageNum%8;
+							
+						}
+						break;
+						default:
+						pageNum=pagerArray[pageTarIndex].innerText;
+						break;
+					}
+					util.DomUtil.removeClass(pagerArray[pageCurIndex], "f-cur");
+					util.DomUtil.addClass(pagerArray[pageTarIndex], "f-cur");
+					pageCurIndex=pageTarIndex;
+					requestData();
+				}
 			}
 		}	
 			
 		function AjaxHandle(text) {
 			var content = JSON.parse(text);
-			//						alert(content.totalCount+" "+content.totalPage);
+//			alert(content.totalCount+" "+content.totalPage);
+//			alert(content.pagination.pageIndex+" "+content.pagination.pageSize+" "+content.pagination.totlePageCount);
+			totalCount=content.totalCount;
+			totalPage=content.totalPage;
 			var contentList = content.list;
 			var cardList = [];
 			for (var i = 0, len = contentList.length; i < len; i++) {
@@ -382,10 +428,12 @@ require(["base", "util", "md5"], function(base, util, md5) {
 			cardBox.innerHTML = "";
 			var url = "http://study.163.com/webDev/couresByCategory.htm";
 			var options = {};
-			var pageNo = parseInt(pagerbox.querySelector(".f-cur").innerText);
+//			var pageNo = parseInt(pagerbox.querySelector(".f-cur").innerText);
+			var pageNo=pageNum;
 			var psize = document.body.clientWidth >= 1205 ? 20 : 15;
 			var type = 10 + tarIndex * 10;
 			options.pageNo = pageNo;
+//			alert(options.pageNo);
 			options.psize = psize;
 			options.type = type;
 			util.AjaxUtil.getAjax(url, options, AjaxHandle);

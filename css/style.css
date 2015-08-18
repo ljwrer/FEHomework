@@ -370,8 +370,8 @@ table {
 	/*height: 1551px;*/
 	/*margin-bottom: -1000px;
 	padding-bottom: 1000px;*/
-	padding-bottom: 100px;
-    margin-bottom: -100px;
+	padding-bottom: 200px;
+    margin-bottom: -200px;
 	background: #f8f8f8;
 	overflow: hidden;
 }
@@ -845,11 +845,12 @@ table {
 	background: #f8f8f8;;
 	border: 2px solid #d6d6d6;
 	border-radius: 2px;
+	background: #ffffff;
 }
 .m-bigcard .top{
 	height: 124px;
 	padding: 19px 19px 20px;
-	background: #ffffff;
+	
 }
 .m-bigcard img{
 	float: left;
@@ -888,6 +889,7 @@ table {
 	/*overflow: hidden;*/
 	font: 14px/24px "microsoft yahei";
 	color: #666666;
+	background: #f8f8f8;
 }
 
 .j-hide{
