@@ -68,7 +68,7 @@ define(["base"], function(base) {
 		},
 		removeClass: function(ele, cls) {
 			if (this.hasClass(ele, cls)) {
-				ele.className = ele.className.replace(new RegExp('(\\s|^)' + cls + '(\\s|$)'), " ");
+				ele.className = ele.className.replace(new RegExp('(\\s|^)' + cls + '(\\s|$)'), "");
 			}
 		},
 		getElementsByClassName: function(names, element) {
@@ -236,7 +236,7 @@ define(["base"], function(base) {
 				var currentX = parseInt(StyleUtil.get(ele,"left"));
 				var currentY = parseInt(StyleUtil.get(ele,"top"));
 				var dist = 0
-				if (currentX === finalX && currentY === finalY) {
+				if (currentX == finalX && currentY == finalY) {
 					clearInterval(intervelID);
 				}
 				if (currentX < finalX) {
