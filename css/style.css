@@ -129,7 +129,7 @@ table {
 }
 .m-logo p {
 	padding-top: 1px;
-	font: 22px/20px "Hiragino Sans GB";
+	font: 22px/20px "Hiragino Sans GB" "microsoft yahei";
 }
 /*.m-head .logo1{
 	padding-right: 10px;
@@ -224,7 +224,7 @@ table {
 	height: 19px;
 }
 .m-head .m-nav a{
-	font: 16px/89px "Hiragino Sans GB";
+	font: 16px/89px "Hiragino Sans GB" "microsoft yahei";
 	color: #666666;
 	text-decoration: none;
 }
