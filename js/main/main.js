@@ -118,7 +118,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		var bannerView = document.getElementById("bannerView");
 		var bannerList = bannerView.children;
 		var bannerBtnBox = document.getElementById("pointer")
-		var bannerBtnList = bannerBtnBox.children;
+		var bannerBtnList = bannerBtnBox.querySelectorAll("li");
 		var PREV = 0;
 		var CURRENT = 0;
 		var NEXT = 1;
@@ -146,18 +146,26 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				}
 				var dist = 1 * 5 / 500;
 				bannerList[PREV].style.opacity = 0;
+				//filter:alpha(opacity=80);
+				bannerList[PREV].style.filter = 'alpha(opacity:'+0+')';
 				bannerList[CURRENT].style.opacity = 0;
+				bannerList[CURRENT].style.filter = 'alpha(opacity:'+0+')';
 				var bannerStep = function() {
 					var currentOp = parseFloat(util.StyleUtil.get(bannerList[CURRENT], "opacity"));
+//					alert(currentOp);
+					console.log(currentOp);
 					currentOp += dist;
 					if (currentOp >= 1) {
+						
 						bannerList[CURRENT].style.opacity = 1;
+						bannerList[CURRENT].style.filter = 'alpha(opacity:'+100+')';
 						clearInterval(bannerID);
 						if (callback) {
 							callback();
 						}
 					} else {
 						bannerList[CURRENT].style.opacity = currentOp;
+						bannerList[CURRENT].style.filter = 'alpha(opacity:'+currentOp*100+')';
 					}
 				}
 				bannerID = setInterval(bannerStep, 5);
@@ -207,7 +215,7 @@ require(["base", "util", "md5"], function(base, util, md5) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
 			if (target.nodeName == "LI"); {
-				var item = util.ArrayUtil.search(bannerBtnBox.children, target);
+				var item = util.ArrayUtil.search(bannerBtnList, target);
 				if (item == -1) return;
 				if (intervalID) {
 					clearInterval(intervalID);

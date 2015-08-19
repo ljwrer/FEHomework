@@ -248,6 +248,7 @@ table {
 }
 .m-silder .box li{
 	opacity: 0;
+	filter: alpha(opacity:0);
 	position: absolute;
 	width: 100%;
 	left: 50%;
@@ -703,9 +704,9 @@ table {
 	right: 0;
 	top: 0;
 	bottom: 0;
-	background: rgba(0,0,0,0.5);
-	background: url(../img/bg.png) \0;
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=95)"; 
+	background: rgba(0,0,0,0.8);
+	background: rgb(0,0,0) \0;
+	filter: alpha(opacity:95);
 }
 .g-mask1 .m-login{
 	position: absolute;

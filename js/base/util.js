@@ -15,12 +15,12 @@ define(["base"], function(base) {
 			}
 			return str;
 		},
-		register:function(num,amount){
+		register: function(num, amount) {
 			var ret;
-			if(num-1>0){
-				ret=num-1
-			}else{
-				ret=(num-1+amount)%amount
+			if (num - 1 > 0) {
+				ret = num - 1
+			} else {
+				ret = (num - 1 + amount) % amount
 			}
 			return ret;
 		}
@@ -156,11 +156,13 @@ define(["base"], function(base) {
 				element.onfocus = function() {
 					if (this.value == this.getAttribute('placeholder')) {
 						this.value = "";
+						this.style.color = "#000000";
 					}
 				}
 				element.onblur = function() {
 					if (this.value == "") {
 						this.value = this.getAttribute('placeholder');
+						this.style.color = "#cccccc";
 					}
 				}
 				element.onblur();
@@ -226,65 +228,65 @@ define(["base"], function(base) {
 	};
 	var MoveUtil = {
 		moveElement: function(ele, finalX, finalY, intervel) {
-			finalX = parseInt(finalX);
-			finalY = parseInt(finalY);
-			if (ele.interverID) {
-				clearInterval(ele.interverID);
-			}
+				finalX = parseInt(finalX);
+				finalY = parseInt(finalY);
+				if (ele.interverID) {
+					clearInterval(ele.interverID);
+				}
 
-			function step() {
-				var currentX = parseInt(StyleUtil.get(ele,"left"));
-				var currentY = parseInt(StyleUtil.get(ele,"top"));
-				var dist = 0
-				if (currentX == finalX && currentY == finalY) {
-					clearInterval(intervelID);
+				function step() {
+					var currentX = parseInt(StyleUtil.get(ele, "left"));
+					var currentY = parseInt(StyleUtil.get(ele, "top"));
+					var dist = 0
+					if (currentX == finalX && currentY == finalY) {
+						clearInterval(intervelID);
+					}
+					if (currentX < finalX) {
+						dist = Math.ceil((finalX - currentX) / 10);
+						currentX += dist;
+					} else if (currentX > finalX) {
+						dist = Math.ceil((currentX - finalX) / 10);
+						currentX -= dist;
+					}
+					if (currentY < finalY) {
+						dist = Math.ceil((finalY - currentY) / 10);
+						currentY += dist;
+					} else if (currentY > finalY) {
+						dist = Math.ceil((currentY - finalY) / 10);
+						currentY -= dist;
+					}
+					ele.style.left = currentX + "px";
+					ele.style.top = currentY + "px";
 				}
-				if (currentX < finalX) {
-					dist = Math.ceil((finalX - currentX) / 10);
-					currentX += dist;
-				} else if (currentX > finalX) {
-					dist = Math.ceil((currentX - finalX) / 10);
-					currentX -= dist;
-				}
-				if (currentY < finalY) {
-					dist = Math.ceil((finalY - currentY) / 10);
-					currentY += dist;
-				} else if (currentY > finalY) {
-					dist = Math.ceil((currentY - finalY) / 10);
-					currentY -= dist;
-				}
-				ele.style.left = currentX + "px";
-				ele.style.top = currentY + "px";
+				var intervelID = setInterval(step, intervel);
+				ele.interverID = intervelID;
 			}
-			var intervelID = setInterval(step, intervel);
-			ele.interverID = intervelID;
-		}
-//		fadeOver: function(ele, time, callback) {
-//			if () {
-//				clearInterval(ele.interverID);
-//			}
-//			var dist = 1 * 25 / 500;
-//
-//			function step() {
-//				var currentOp = StyleUtil.get(ele, "opacity");
-//				currentOp += dist;
-//				if (currentOp >= 1) {
-//					ele.opacity = 1;
-//					clearInterval(intervelID);
-//					ele.intervalID = undefined;
-//					if (callback) {
-//						callback();
-//					}
-//				} else {
-//					ele.opacity = currentOp;
-//				}
-//			}
-//			var intervelID = setInterval(step, 25);
-//			ele.intervalID = intervelID;
-//		}
+			//		fadeOver: function(ele, time, callback) {
+			//			if () {
+			//				clearInterval(ele.interverID);
+			//			}
+			//			var dist = 1 * 25 / 500;
+			//
+			//			function step() {
+			//				var currentOp = StyleUtil.get(ele, "opacity");
+			//				currentOp += dist;
+			//				if (currentOp >= 1) {
+			//					ele.opacity = 1;
+			//					clearInterval(intervelID);
+			//					ele.intervalID = undefined;
+			//					if (callback) {
+			//						callback();
+			//					}
+			//				} else {
+			//					ele.opacity = currentOp;
+			//				}
+			//			}
+			//			var intervelID = setInterval(step, 25);
+			//			ele.intervalID = intervelID;
+			//		}
 	};
 	var ArrayUtil = {
-		search:function(arr, item) {
+		search: function(arr, item) {
 			var ret = -1;
 			for (var i = 0, len = arr.length; i < len; i++) {
 				if (arr[i] === item) {
@@ -305,6 +307,6 @@ define(["base"], function(base) {
 		FormUtil: FormUtil,
 		AjaxUtil: AjaxUtil,
 		MoveUtil: MoveUtil,
-		ArrayUtil:ArrayUtil
+		ArrayUtil: ArrayUtil
 	};
 })
