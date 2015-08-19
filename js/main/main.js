@@ -146,14 +146,11 @@ require(["base", "util", "md5"], function(base, util, md5) {
 				}
 				var dist = 1 * 5 / 500;
 				bannerList[PREV].style.opacity = 0;
-				//filter:alpha(opacity=80);
 				bannerList[PREV].style.filter = 'alpha(opacity:'+0+')';
 				bannerList[CURRENT].style.opacity = 0;
 				bannerList[CURRENT].style.filter = 'alpha(opacity:'+0+')';
 				var bannerStep = function() {
 					var currentOp = parseFloat(util.StyleUtil.get(bannerList[CURRENT], "opacity"));
-//					alert(currentOp);
-					console.log(currentOp);
 					currentOp += dist;
 					if (currentOp >= 1) {
 						

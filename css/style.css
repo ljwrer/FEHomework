@@ -259,15 +259,15 @@ table {
 	position: absolute;
 	z-index: 9999;
 	bottom: 20px;
-	width: 62px;
-	margin-left: -31px;
+	width: 66px;
+	margin-left: -33px;
 	height: 10px;
 	left: 50%;
 }
 .m-silder .m-pointer li{
 	float: left;
 	display: inline-block;
-	margin: 0 5px;
+	margin: 0 6px;
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
@@ -828,14 +828,10 @@ table {
 	.g-foot .m-foot{
 		width: 980px;
 	}
-}
-@media only screen and (min-width: 0px) and (max-width: 1204px) {
 	.g-nav2 .m-intro{
 		width: 980px;
 		/*width: 100%;*/
 	}
-}
-@media only screen and (max-width:1204px ) {
 	.g-content-box{
 		width: 980px;
 	}
@@ -844,6 +840,16 @@ table {
 	}*/
 	.g-contnet .g-main .m-pager{
 		margin-right: 38px;
+	}
+	
+	
+}
+@media only screen and (min-width:1652px ) {
+	.m-silder .box li{
+		margin-left: -960px;
+	}
+	.m-silder img{
+		width: 1920px;
 	}
 }
 
