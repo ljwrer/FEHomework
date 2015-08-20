@@ -1,10 +1,10 @@
-define(["base"], function(base) {
+define([], function() {
 	if (!("innerText" in document.body)) {
 		HTMLElement.prototype.__defineGetter__("innerText", function() {
 			return this.textContent;
 		});
-		HTMLElement.prototype.__defineSetter__("innnerText", function(s) {
-			return this.textContent = s;
+		HTMLElement.prototype.__defineSetter__("innerText", function(s) {
+			this.textContent = s;
 		});
 	}
 	var GennerUtil = {

@@ -1,7 +1,6 @@
 require.config({
 	baseUrl: "js",
 	paths: {
-		"base": "base/base",
 		"util": "base/util",
 		"md5": "lib/md5.min"
 	},
@@ -11,7 +10,7 @@ require.config({
 		}
 	}
 })
-require(["base", "util", "md5"], function(base, util, md5) {
+require(["util", "md5"], function(util, md5) {
 	/* 关闭顶部通知条 */
 	(function() {
 		var ghead = document.querySelector(".g-head");
@@ -473,10 +472,15 @@ require(["base", "util", "md5"], function(base, util, md5) {
 		var videoWindow=document.getElementById("videoWindow");
 		videoOpenBtn.onclick=function(){
 			util.StyleUtil.show(videoMask);
-			videoWindow.play();
+			if(videoWindow.play){
+				videoWindow.play();			
+			}
+
 		}
 		videoCloseBtn.onclick=function(){
-			videoWindow.pause();
+			if(videoWindow.pause){
+				videoWindow.pause();
+			}
 			util.StyleUtil.hide(videoMask);
 		}
 	})();

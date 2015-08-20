@@ -55,9 +55,6 @@ table {
 	overflow: hidden;
 	visibility: hidden;
 }
-.clear-fix{
-	zoom: 1;
-}
 
 .g-tip{
 	width: 100%;
@@ -129,7 +126,11 @@ table {
 }
 .m-logo p {
 	padding-top: 1px;
-	font: 22px/20px "Hiragino Sans GB" "microsoft yahei";
+	
+	font: 22px/20px "Hiragino Sans GB","microsoft yahei";
+	/*font-family: "microsoft yahei";
+	font-size: 22px;
+	line-height: 20px;*/
 }
 /*.m-head .logo1{
 	padding-right: 10px;
@@ -211,6 +212,7 @@ table {
 }
 .m-head .m-nav ul{
 	overflow: hidden;
+	margin-right: 64px;
 }
 .m-head .m-nav li{
 	display: inline-block;
@@ -222,9 +224,13 @@ table {
 	background: url(../img/sprite.png) no-repeat -23px 0;
 	width: 19px;
 	height: 19px;
+	cursor: pointer;
+}
+.m-head .m-nav .u-sprite:hover{
+	background: url(../img/sprite.png) no-repeat -51px 0;
 }
 .m-head .m-nav a{
-	font: 16px/89px "Hiragino Sans GB" "microsoft yahei";
+	font: 16px/89px "Hiragino Sans GB","microsoft yahei";
 	color: #666666;
 	text-decoration: none;
 }
@@ -236,26 +242,26 @@ table {
 	height: 460px;
 	overflow: hidden;
 }
-.g-nav1 .m-silder{
+.g-nav1 .m-slider{
 	position: relative;
 	width: 100%;
 	height: 460px;
 	overflow: hidden;
 }
-.m-silder .box{
+.m-slider .box{
 	width: 100%;
 	height: 100%;
 }
-.m-silder .box li{
-	opacity: 0;
-	filter: alpha(opacity:0);
+.m-slider .box li{
 	position: absolute;
 	width: 100%;
 	left: 50%;
 	margin-left: -826px;
+	opacity: 0;
+	filter: alpha(opacity:0);
 }
 
-.m-silder .m-pointer{
+.m-slider .m-pointer{
 	position: absolute;
 	z-index: 9999;
 	bottom: 20px;
@@ -264,7 +270,7 @@ table {
 	height: 10px;
 	left: 50%;
 }
-.m-silder .m-pointer li{
+.m-slider .m-pointer li{
 	float: left;
 	display: inline-block;
 	margin: 0 6px;
@@ -273,7 +279,7 @@ table {
 	border-radius: 50%;
 	background: white;
 }
-.m-silder .m-pointer .j-cur{
+.m-slider .m-pointer .j-cur{
 	background:black;
 }
 /*------------------------------------------*/
@@ -417,6 +423,7 @@ table {
 }
 .m-tab .j-tabed{
 	background: #39a030;
+	color:#ffffff
 }
 
 .m-card-box{
@@ -440,8 +447,12 @@ table {
 	/*overflow: hidden;*/
 	background: #ffffff;
 	/*background: rgba(0,100,0,0.5);*/
-	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
+	box-shadow:0 1px 0 #e6e6e6,1px 1px 0 #f1f1f1,-1px 1px 0 #f1f1f1,0 2px 0 #f1f1f1;
 }
+.m-card:hover{
+	box-shadow:0 1px 0 #e6e6e6,1px 0px 0 #e6e6e6,-1px 0px 0 #e6e6e6,0 -1px 0 #e6e6e6 ;
+}
+
 .m-card img{
 	
 	width: 223px;
@@ -456,7 +467,9 @@ table {
 	font: 12px/12px "microsoft yahei";
 	max-width: 225px;
 	color: #333333;
-
+}
+.m-card .name:hover{
+	color: #39a030;
 }
 .m-card .provider{
 	padding: 10px 0 0 5px;
@@ -511,9 +524,15 @@ table {
 	font: 14px/20px "microsoft yahei";
 	text-align: center;
 }
-.m-pager li:first-child,.m-pager li:last-child{
+.m-pager li:first-child,.m-pager li:last-child,{
 	width: 30px;
 	background: #9dd8b1;	
+	color: #ffffff;
+}
+#forwardPage,#backPage{
+	width: 30px;
+	background: #9dd8b1;	
+	color: #ffffff;
 }
 .m-pager li:hover{
 	background: #9dd8b1;	
@@ -521,7 +540,7 @@ table {
 }
 .m-pager .f-cur{
 	color:#39a030;
-	background: #9dd8b1;
+	/*background: #9dd8b1;*/
 }
 
 /* --------------------------------------- */
@@ -562,10 +581,13 @@ table {
 .g-aside .m-rank{
 	margin-top: 20px;
 	padding-bottom: 20px;
-	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
 	border-bottom: 1px solid #d4d3d3;
 	background: #ffffff;
 }
+.g-aside .m-rank:hover{
+	box-shadow:0 1px 0 #d4d3d3,1px 1px 0 #ecebeb,-1px 1px 0 #ecebeb,0 2px 0 #ecebeb;
+}
+
 .m-rank h2{
 	display: block;
 	padding-left: 20px;
@@ -705,12 +727,13 @@ table {
 	top: 0;
 	bottom: 0;
 	background: rgba(0,0,0,0.8);
-	background: rgb(0,0,0) \0;
 	filter: alpha(opacity:95);
+	background: rgb(0,0,0) \9;
 }
+
 .g-mask1 .m-login{
 	position: absolute;
-	z-index: 19999;
+	z-index: 9999;
 	width: 387px;
 	height: 288px;
 	left: 50%;
@@ -762,15 +785,15 @@ table {
 	height: 46px;
 	margin-top: 29px;
 	background: radial-gradient(ellipse at 0 0, #27ad4b,#108927);
-	background: url(../img/sprite.png) no-repeat -407px -24px \0;
-	width: 295px \0;
-	height: 48px \0;
 	box-shadow: 1px 1px 0 #d5e3da;
 	border: 0;
 	padding: 0;
 	text-align: center;
 	font: 16px/46px "microsoft yahei";
 	color: #ffffff;
+	background: url(../img/sprite.png) no-repeat -407px -24px \9;
+	width: 295px \9;
+	height: 48px \9;
 }
 
 /* ----------------------------------- */
@@ -845,10 +868,10 @@ table {
 	
 }
 @media only screen and (min-width:1652px ) {
-	.m-silder .box li{
+	.m-slider .box li{
 		margin-left: -960px;
 	}
-	.m-silder img{
+	.m-slider img{
 		width: 1920px;
 	}
 }
