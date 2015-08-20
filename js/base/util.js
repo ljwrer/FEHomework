@@ -1,4 +1,5 @@
 define([], function() {
+	//让firefox支持innerText
 	if (!("innerText" in document.body)) {
 		HTMLElement.prototype.__defineGetter__("innerText", function() {
 			return this.textContent;
@@ -7,7 +8,9 @@ define([], function() {
 			this.textContent = s;
 		});
 	}
+	//通用工具
 	var GennerUtil = {
+	//将连字符格式转换为驼峰格式
 		repalceChar: function(str, char) {
 			var i;
 			while ((i = str.indexOf(char)) != -1) {
@@ -15,17 +18,10 @@ define([], function() {
 			}
 			return str;
 		},
-		register: function(num, amount) {
-			var ret;
-			if (num - 1 > 0) {
-				ret = num - 1
-			} else {
-				ret = (num - 1 + amount) % amount
-			}
-			return ret;
-		}
 	};
+	//cookie工具 
 	var CookieUtil = {
+	//获取cookie
 		get: function(name) {
 			if (!document.cookie) return null;
 			var allCookie = document.cookie;
@@ -42,6 +38,7 @@ define([], function() {
 			}
 			return CookieValue;
 		},
+	//设置cookie
 		set: function(name, value, expires, domain, path, secure) {
 			var CookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
 			if (expires instanceof Date) {
@@ -59,55 +56,38 @@ define([], function() {
 			document.cookie = CookieText;
 		}
 	};
+	//DOM工具
 	var DomUtil = {
+		//查询是否用有指定class
 		hasClass: function(ele, cls) {
 			return (new RegExp('(\\s|^)' + cls + '(\\s|$)')).test(ele.className);
 		},
+		//增加class
 		addClass: function(ele, cls) {
 			if (!this.hasClass(ele, cls)) ele.className += " " + cls;
 		},
+		//移除class
 		removeClass: function(ele, cls) {
 			if (this.hasClass(ele, cls)) {
 				ele.className = ele.className.replace(new RegExp('(\\s|^)' + cls + '(\\s|$)'), "");
 			}
-		},
-		getElementsByClassName: function(names, element) {
-			if (!element) element = document;
-			if (document.getElementsByClassName) {
-				return element.getElementsByClassName(names);
-			} else {
-				var result = new Array();
-				var nodes = element.getElementsByTagName("*");
-				var namesArray = names.split(' ');
-				var hasAllClassName = [];
-				for (var j = 0, len = nodes.length; j < len; j++) {
-					hasAllClassName[j] = true;
-					for (var i = 0; i < namesArray.length; i++) {
-						if (nodes[j].className.indexOf(namesArray[i]) === -1) {
-							hasAllClassName[j] = false;
-						}
-					}
-				}
-				for (i = 0; i < len; i++) {
-					if (hasAllClassName[i]) {
-						result[result.length] = nodes[i];
-					}
-				}
-				return result;
-			}
 		}
 	};
+	//事件处理工具
 	var EventUtil = {
+		//绑定事件
 		addEvent: document.addEventListener ? function(elem, type, listener, useCapture) {
 			elem.addEventListener(type, listener, useCapture);
 		} : function(elem, type, listener, useCapture) {
 			elem.attachEvent('on' + type, listener);
 		},
+		//取消绑定事件
 		delEvent: document.removeEventListener ? function(elem, type, listener, useCapture) {
 			elem.removeEventListener(type, listener, useCapture);
 		} : function(elem, type, listener, useCapture) {
 			elem.detachEvent('on' + type, listener);
 		},
+		//取消事件默认行为
 		preventDefault: function(event) {
 			if (event.preventDefault) {
 				event.preventDefault();
@@ -115,22 +95,28 @@ define([], function() {
 				event.returnValue = false;
 			}
 		},
+		//获取事件
 		getEvent: function(event) {
 			return event ? event : window.event;
 		},
+		//获取事件target
 		getTarget: function(event) {
 			return event.target || event.srcElement;
 		}
 	};
+	//样式工具
 	var StyleUtil = {
+		//隐藏
 		hide: function(ele) {
 			DomUtil.removeClass(ele, "j-show");
 			DomUtil.addClass(ele, "j-hide");
 		},
+		//显示
 		show: function(ele) {
 			DomUtil.removeClass(ele, "j-hide");
 			DomUtil.addClass(ele, "j-show");
 		},
+		//获取样式对象
 		getStyle: function(ele) {
 			if (window.getComputedStyle) {
 				return window.getComputedStyle(ele);
@@ -138,6 +124,7 @@ define([], function() {
 				return ele.currentStyle;
 			}
 		},
+		//获取样式属性
 		get: function(ele, prop) {
 			var dec = this.getStyle(ele);
 			prop = GennerUtil.repalceChar(prop, "-");
@@ -145,8 +132,9 @@ define([], function() {
 			return result;
 		}
 	};
-
+	//表单工具
 	var FormUtil = {
+		//兼容placeholder
 		resetFields: function(whichform) {
 			if ('placeholder' in document.createElement('input')) return;
 			for (var i = 0; i < whichform.elements.length; i++) {
@@ -169,7 +157,9 @@ define([], function() {
 			}
 		}
 	};
+	//Ajax工具
 	var AjaxUtil = {
+		//兼容获取xhr
 		getHTTPObject: function() {
 			if (typeof XMLHttpRequest === undefined) {
 				try {
@@ -184,6 +174,7 @@ define([], function() {
 			}
 			return new XMLHttpRequest();
 		},
+		//请求参数序列化
 		serialize: function(data) {
 			var ret = [];
 			for (var name in data) {
@@ -197,6 +188,7 @@ define([], function() {
 			ret = ret.join("&");
 			return ret;
 		},
+		//get方法进行Ajax请求
 		getAjax: function(url, options, callback) {
 			var xhr = new this.getHTTPObject();
 			xhr.open("GET", url + "?" + this.serialize(options), true);
@@ -204,36 +196,21 @@ define([], function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status >= 200 && xhr.status <= 300 || xhr.status == 304) {
 						callback(xhr.responseText);
-					} else {
-						//						alert("get failed,status:" + xhr.status);
 					}
 				}
 			};
 			xhr.send(null);
-		},
-		postAjax: function(url, options, callback) {
-			var xhr = new this.getHTTPObject();
-			xhr.open("POST", url, true);
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4) {
-					if (xhr.status >= 200 && xhr.status <= 300 || xhr.status == 304) {
-						callback(xhr.responseText);
-					} else {
-						//						alert("post failed,status:" + xhr.status);
-					}
-				}
-			};
-			xhr.send(this.serialize(options));
 		}
 	};
+	//动画工具
 	var MoveUtil = {
+		//移动
 		moveElement: function(ele, finalX, finalY, intervel) {
 				finalX = parseInt(finalX);
 				finalY = parseInt(finalY);
 				if (ele.interverID) {
 					clearInterval(ele.interverID);
 				}
-
 				function step() {
 					var currentX = parseInt(StyleUtil.get(ele, "left"));
 					var currentY = parseInt(StyleUtil.get(ele, "top"));
@@ -260,32 +237,11 @@ define([], function() {
 				}
 				var intervelID = setInterval(step, intervel);
 				ele.interverID = intervelID;
-			}
-			//		fadeOver: function(ele, time, callback) {
-			//			if () {
-			//				clearInterval(ele.interverID);
-			//			}
-			//			var dist = 1 * 25 / 500;
-			//
-			//			function step() {
-			//				var currentOp = StyleUtil.get(ele, "opacity");
-			//				currentOp += dist;
-			//				if (currentOp >= 1) {
-			//					ele.opacity = 1;
-			//					clearInterval(intervelID);
-			//					ele.intervalID = undefined;
-			//					if (callback) {
-			//						callback();
-			//					}
-			//				} else {
-			//					ele.opacity = currentOp;
-			//				}
-			//			}
-			//			var intervelID = setInterval(step, 25);
-			//			ele.intervalID = intervelID;
-			//		}
+		}
 	};
+	//数组工具
 	var ArrayUtil = {
+		//搜索数组并返回下标
 		search: function(arr, item) {
 			var ret = -1;
 			for (var i = 0, len = arr.length; i < len; i++) {
@@ -297,7 +253,6 @@ define([], function() {
 			return ret;
 		}
 	}
-
 	return {
 		GennerUtil: GennerUtil,
 		CookieUtil: CookieUtil,
