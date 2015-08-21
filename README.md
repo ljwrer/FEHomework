@@ -1,7 +1,8 @@
 # FrontEndWebDeveloperNanodegreeHomework
 This is the homework of Front-End Web Developer Nanodegree on http://mooc.study.163.com/smartSpec/detail/12001.htm
 
-Requirement Document:http://nos.netease.com/edu-common-private/4BDA801A2035A03E0766CBA110809907-1428980662650?NOSAccessKeyId=7ba71f968e4340f1ab476ecb300190fa&Expires=1440124703&Signature=Snr02OpTy5zMglzich4OC4ug7Y7L7Hmh4Ie4bVcNjUo%3D&download=%E5%BE%AE%E4%B8%93%E4%B8%9AWEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%BD%9C%E4%B8%9A.rar
+Requirement Document:
+http://nos.netease.com/edu-common-private/4BDA801A2035A03E0766CBA110809907-1428980662650?NOSAccessKeyId=7ba71f968e4340f1ab476ecb300190fa&Expires=1440124703&Signature=Snr02OpTy5zMglzich4OC4ug7Y7L7Hmh4Ie4bVcNjUo%3D&download=%E5%BE%AE%E4%B8%93%E4%B8%9AWEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%BD%9C%E4%B8%9A.rar
 
 # issue
  1. 卡片内容只有前4页为真实数据
