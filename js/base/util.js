@@ -1,16 +1,16 @@
-define([], function() {
-	//让firefox支持innerText
-	if (!("innerText" in document.body)) {
-		HTMLElement.prototype.__defineGetter__("innerText", function() {
-			return this.textContent;
-		});
-		HTMLElement.prototype.__defineSetter__("innerText", function(s) {
-			this.textContent = s;
-		});
-	}
+//让firefox支持innerText
+if (!("innerText" in document.body)) {
+	HTMLElement.prototype.__defineGetter__("innerText", function() {
+		return this.textContent;
+	});
+	HTMLElement.prototype.__defineSetter__("innerText", function(s) {
+		this.textContent = s;
+	});
+}
+var util = {
 	//通用工具
-	var GennerUtil = {
-	//将连字符格式转换为驼峰格式
+	GennerUtil: {
+		//将连字符格式转换为驼峰格式
 		repalceChar: function(str, char) {
 			var i;
 			while ((i = str.indexOf(char)) != -1) {
@@ -18,10 +18,10 @@ define([], function() {
 			}
 			return str;
 		},
-	};
+	},
 	//cookie工具 
-	var CookieUtil = {
-	//获取cookie
+	CookieUtil: {
+		//获取cookie
 		get: function(name) {
 			if (!document.cookie) return null;
 			var allCookie = document.cookie;
@@ -38,7 +38,7 @@ define([], function() {
 			}
 			return CookieValue;
 		},
-	//设置cookie
+		//设置cookie
 		set: function(name, value, expires, domain, path, secure) {
 			var CookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
 			if (expires instanceof Date) {
@@ -55,9 +55,9 @@ define([], function() {
 			}
 			document.cookie = CookieText;
 		}
-	};
+	},
 	//DOM工具
-	var DomUtil = {
+	DomUtil: {
 		//查询是否用有指定class
 		hasClass: function(ele, cls) {
 			return (new RegExp('(\\s|^)' + cls + '(\\s|$)')).test(ele.className);
@@ -72,9 +72,9 @@ define([], function() {
 				ele.className = ele.className.replace(new RegExp('(\\s|^)' + cls + '(\\s|$)'), "");
 			}
 		}
-	};
+	},
 	//事件处理工具
-	var EventUtil = {
+	EventUtil: {
 		//绑定事件
 		addEvent: document.addEventListener ? function(elem, type, listener, useCapture) {
 			elem.addEventListener(type, listener, useCapture);
@@ -103,18 +103,18 @@ define([], function() {
 		getTarget: function(event) {
 			return event.target || event.srcElement;
 		}
-	};
+	},
 	//样式工具
-	var StyleUtil = {
+	StyleUtil: {
 		//隐藏
 		hide: function(ele) {
-			DomUtil.removeClass(ele, "j-show");
-			DomUtil.addClass(ele, "j-hide");
+			util.DomUtil.removeClass(ele, "j-show");
+			util.DomUtil.addClass(ele, "j-hide");
 		},
 		//显示
 		show: function(ele) {
-			DomUtil.removeClass(ele, "j-hide");
-			DomUtil.addClass(ele, "j-show");
+			util.DomUtil.removeClass(ele, "j-hide");
+			util.DomUtil.addClass(ele, "j-show");
 		},
 		//获取样式对象
 		getStyle: function(ele) {
@@ -127,13 +127,13 @@ define([], function() {
 		//获取样式属性
 		get: function(ele, prop) {
 			var dec = this.getStyle(ele);
-			prop = GennerUtil.repalceChar(prop, "-");
+			prop = util.GennerUtil.repalceChar(prop, "-");
 			var result = dec[prop];
 			return result;
 		}
-	};
+	},
 	//表单工具
-	var FormUtil = {
+	FormUtil: {
 		//兼容placeholder
 		resetFields: function(whichform) {
 			if ('placeholder' in document.createElement('input')) return;
@@ -156,9 +156,9 @@ define([], function() {
 				element.onblur();
 			}
 		}
-	};
+	},
 	//Ajax工具
-	var AjaxUtil = {
+	AjaxUtil: {
 		//兼容获取xhr
 		getHTTPObject: function() {
 			if (typeof XMLHttpRequest === undefined) {
@@ -201,46 +201,47 @@ define([], function() {
 			};
 			xhr.send(null);
 		}
-	};
+	},
 	//动画工具
-	var MoveUtil = {
+	MoveUtil: {
 		//移动
 		moveElement: function(ele, finalX, finalY, intervel) {
-				finalX = parseInt(finalX);
-				finalY = parseInt(finalY);
-				if (ele.interverID) {
-					clearInterval(ele.interverID);
+			finalX = parseInt(finalX);
+			finalY = parseInt(finalY);
+			if (ele.interverID) {
+				clearInterval(ele.interverID);
+			}
+
+			function step() {
+				var currentX = parseInt(util.StyleUtil.get(ele, "left"));
+				var currentY = parseInt(util.StyleUtil.get(ele, "top"));
+				var dist = 0
+				if (currentX == finalX && currentY == finalY) {
+					clearInterval(intervelID);
 				}
-				function step() {
-					var currentX = parseInt(StyleUtil.get(ele, "left"));
-					var currentY = parseInt(StyleUtil.get(ele, "top"));
-					var dist = 0
-					if (currentX == finalX && currentY == finalY) {
-						clearInterval(intervelID);
-					}
-					if (currentX < finalX) {
-						dist = Math.ceil((finalX - currentX) / 10);
-						currentX += dist;
-					} else if (currentX > finalX) {
-						dist = Math.ceil((currentX - finalX) / 10);
-						currentX -= dist;
-					}
-					if (currentY < finalY) {
-						dist = Math.ceil((finalY - currentY) / 10);
-						currentY += dist;
-					} else if (currentY > finalY) {
-						dist = Math.ceil((currentY - finalY) / 10);
-						currentY -= dist;
-					}
-					ele.style.left = currentX + "px";
-					ele.style.top = currentY + "px";
+				if (currentX < finalX) {
+					dist = Math.ceil((finalX - currentX) / 10);
+					currentX += dist;
+				} else if (currentX > finalX) {
+					dist = Math.ceil((currentX - finalX) / 10);
+					currentX -= dist;
 				}
-				var intervelID = setInterval(step, intervel);
-				ele.interverID = intervelID;
+				if (currentY < finalY) {
+					dist = Math.ceil((finalY - currentY) / 10);
+					currentY += dist;
+				} else if (currentY > finalY) {
+					dist = Math.ceil((currentY - finalY) / 10);
+					currentY -= dist;
+				}
+				ele.style.left = currentX + "px";
+				ele.style.top = currentY + "px";
+			}
+			var intervelID = setInterval(step, intervel);
+			ele.interverID = intervelID;
 		}
-	};
+	},
 	//数组工具
-	var ArrayUtil = {
+	ArrayUtil: {
 		//搜索数组并返回下标
 		search: function(arr, item) {
 			var ret = -1;
@@ -253,15 +254,4 @@ define([], function() {
 			return ret;
 		}
 	}
-	return {
-		GennerUtil: GennerUtil,
-		CookieUtil: CookieUtil,
-		DomUtil: DomUtil,
-		EventUtil: EventUtil,
-		StyleUtil: StyleUtil,
-		FormUtil: FormUtil,
-		AjaxUtil: AjaxUtil,
-		MoveUtil: MoveUtil,
-		ArrayUtil: ArrayUtil
-	};
-})
+}

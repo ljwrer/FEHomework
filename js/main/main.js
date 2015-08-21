@@ -1,16 +1,4 @@
-require.config({
-	baseUrl: "js",
-	paths: {
-		"util": "base/util",
-		"md5": "lib/md5.min"
-	},
-	shim: {　　　　　　
-		'md5': {　　　　　　　　
-			exports: 'md5'　　　　
-		}
-	}
-})
-require(["util", "md5"], function(util, md5) {
+(function(util) {
 	//关闭顶部通知条 
 	(function() {
 		var ghead = document.querySelector(".g-head");
@@ -82,12 +70,10 @@ require(["util", "md5"], function(util, md5) {
 				}
 			}
 			//点击取消关注处理函数
-
 		function unfollowHandle() {
 				followBtnHandle(false);
 			}
 			//处理关注与取消关注
-
 		function followBtnHandle(sta) {
 				switch (sta) {
 					case true:
@@ -107,7 +93,6 @@ require(["util", "md5"], function(util, md5) {
 				}
 			}
 			//关注成功，设置cookie并改变显示效果，修改粉丝数
-
 		function followSuccess(sta) {
 			if (sta == 1) {
 				util.StyleUtil.hide(follow.parentNode);
@@ -146,7 +131,6 @@ require(["util", "md5"], function(util, md5) {
 				}
 			}
 			//500ms淡入函数 
-
 		function banner(callback) {
 				if (bannerID) {
 					clearInterval(bannerID);
@@ -174,7 +158,6 @@ require(["util", "md5"], function(util, md5) {
 				bannerID = setInterval(bannerStep, 5);
 			}
 			//更新计数 
-
 		function counter() {
 				PREV = CURRENT;
 				CURRENT = NEXT;
@@ -182,7 +165,6 @@ require(["util", "md5"], function(util, md5) {
 				NEXT = NEXT % NUM;
 			}
 			//5000ms轮播函数
-
 		function slider() {
 			if (intervalID) {
 				clearInterval(intervalID);
@@ -205,7 +187,6 @@ require(["util", "md5"], function(util, md5) {
 				}
 			}
 			//mouseout继续轮播
-
 		function viewOutHandle(event) {
 			event = util.EventUtil.getEvent(event);
 			var target = util.EventUtil.getTarget(event);
@@ -364,7 +345,6 @@ require(["util", "md5"], function(util, md5) {
 				}
 			}
 			//底部分页器切换
-
 		function pagerChangeHandle(event) {
 				event = util.EventUtil.getEvent(event);
 				var target = util.EventUtil.getTarget(event);
@@ -413,7 +393,6 @@ require(["util", "md5"], function(util, md5) {
 				}
 			}
 			//成功请求卡片数据后处理
-
 		function AjaxHandle(text) {
 				var content = JSON.parse(text);
 				totalCount = content.totalCount;
@@ -440,7 +419,6 @@ require(["util", "md5"], function(util, md5) {
 				}
 			}
 			//设置卡片Ajax请求参数
-
 		function requestData() {
 				cardBox.innerHTML = "";
 				var url = "http://study.163.com/webDev/couresByCategory.htm";
@@ -527,4 +505,4 @@ require(["util", "md5"], function(util, md5) {
 		}
 		setInterval(step, 5000);
 	})();
-})
+})(util);
