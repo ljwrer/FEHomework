@@ -10,7 +10,7 @@ define([], function() {
 	}
 	//通用工具
 	var GennerUtil = {
-	//将连字符格式转换为驼峰格式
+		//将连字符格式转换为驼峰格式
 		repalceChar: function(str, char) {
 			var i;
 			while ((i = str.indexOf(char)) != -1) {
@@ -21,7 +21,7 @@ define([], function() {
 	};
 	//cookie工具 
 	var CookieUtil = {
-	//获取cookie
+		//获取cookie
 		get: function(name) {
 			if (!document.cookie) return null;
 			var allCookie = document.cookie;
@@ -38,7 +38,7 @@ define([], function() {
 			}
 			return CookieValue;
 		},
-	//设置cookie
+		//设置cookie
 		set: function(name, value, expires, domain, path, secure) {
 			var CookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
 			if (expires instanceof Date) {
@@ -155,6 +155,34 @@ define([], function() {
 				}
 				element.onblur();
 			}
+		},
+		//兼容required
+		validateForm: function(whichform) {
+			for (var i = 0; i < whichform.elements.length; i++) {
+				var element = whichform.elements[i];
+				if (element.getAttribute("required") == 'required') {
+					if (!this.isFilled(element)) {
+						var info;
+						switch (element.name) {
+							case "userName":
+								info = "账号";
+								break;
+							case "password":
+								info = "密码";
+								break;
+							default:
+								break;
+						}
+						alert("请输入" + info);
+						return false;
+					}
+				}
+			}
+			return true;
+		},
+		//检测输入是否为空
+		isFilled: function(field) {
+			return (field.value.length > 1 && field.value != field.placeholder);
 		}
 	};
 	//Ajax工具
@@ -206,37 +234,38 @@ define([], function() {
 	var MoveUtil = {
 		//移动
 		moveElement: function(ele, finalX, finalY, intervel) {
-				finalX = parseInt(finalX);
-				finalY = parseInt(finalY);
-				if (ele.interverID) {
-					clearInterval(ele.interverID);
+			finalX = parseInt(finalX);
+			finalY = parseInt(finalY);
+			if (ele.interverID) {
+				clearInterval(ele.interverID);
+			}
+
+			function step() {
+				var currentX = parseInt(StyleUtil.get(ele, "left"));
+				var currentY = parseInt(StyleUtil.get(ele, "top"));
+				var dist = 0
+				if (currentX == finalX && currentY == finalY) {
+					clearInterval(intervelID);
 				}
-				function step() {
-					var currentX = parseInt(StyleUtil.get(ele, "left"));
-					var currentY = parseInt(StyleUtil.get(ele, "top"));
-					var dist = 0
-					if (currentX == finalX && currentY == finalY) {
-						clearInterval(intervelID);
-					}
-					if (currentX < finalX) {
-						dist = Math.ceil((finalX - currentX) / 10);
-						currentX += dist;
-					} else if (currentX > finalX) {
-						dist = Math.ceil((currentX - finalX) / 10);
-						currentX -= dist;
-					}
-					if (currentY < finalY) {
-						dist = Math.ceil((finalY - currentY) / 10);
-						currentY += dist;
-					} else if (currentY > finalY) {
-						dist = Math.ceil((currentY - finalY) / 10);
-						currentY -= dist;
-					}
-					ele.style.left = currentX + "px";
-					ele.style.top = currentY + "px";
+				if (currentX < finalX) {
+					dist = Math.ceil((finalX - currentX) / 10);
+					currentX += dist;
+				} else if (currentX > finalX) {
+					dist = Math.ceil((currentX - finalX) / 10);
+					currentX -= dist;
 				}
-				var intervelID = setInterval(step, intervel);
-				ele.interverID = intervelID;
+				if (currentY < finalY) {
+					dist = Math.ceil((finalY - currentY) / 10);
+					currentY += dist;
+				} else if (currentY > finalY) {
+					dist = Math.ceil((currentY - finalY) / 10);
+					currentY -= dist;
+				}
+				ele.style.left = currentX + "px";
+				ele.style.top = currentY + "px";
+			}
+			var intervelID = setInterval(step, intervel);
+			ele.interverID = intervelID;
 		}
 	};
 	//数组工具
