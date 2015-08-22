@@ -69,7 +69,7 @@ define([], function() {
 		//移除class
 		removeClass: function(ele, cls) {
 			if (this.hasClass(ele, cls)) {
-				ele.className = ele.className.replace(new RegExp('(\\s|^)' + cls + '(\\s|$)'), "");
+				ele.className = ele.className.replace(new RegExp('(\\s|^)' + cls + '(\\s|$)'), " ");
 			}
 		}
 	};
