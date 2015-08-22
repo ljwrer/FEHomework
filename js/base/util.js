@@ -161,7 +161,7 @@ var util = {
 			for (var i = 0; i < whichform.elements.length; i++) {
 				var element = whichform.elements[i];
 				if (element.getAttribute("required") == 'required') {
-					if (!util.FormUtil.isFilled(element)) {
+					if (!this.isFilled(element)) {
 						var info;
 						switch(element.name){
 							case "userName":
@@ -182,7 +182,7 @@ var util = {
 		},
 		//检测输入是否为空
 		isFilled:function(field) {
-			return (field.value.length > 1 && field.value != field.placeholder);
+			return (field.value.length > 0 && field.value != field.placeholder);
 		}
 	},
 	//Ajax工具
