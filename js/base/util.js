@@ -182,7 +182,7 @@ define([], function() {
 		},
 		//检测输入是否为空
 		isFilled: function(field) {
-			return (field.value.length > 1 && field.value != field.placeholder);
+			return (field.value.length > 0 && field.value != field.placeholder);
 		}
 	};
 	//Ajax工具
