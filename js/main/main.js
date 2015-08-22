@@ -50,7 +50,9 @@
 						var target = util.EventUtil.getTarget(event);
 						//表单验证
 						if(!("required" in document.createElement("input"))){
-							util.FormUtil.validateForm(target);
+							if(!util.FormUtil.validateForm(target)){
+								return false;
+							}
 						}
 						var btn = target.elements[2];
 						btn.disabled = true;
