@@ -155,6 +155,34 @@ var util = {
 				}
 				element.onblur();
 			}
+		},
+		//兼容required
+		validateForm:function(whichform) {
+			for (var i = 0; i < whichform.elements.length; i++) {
+				var element = whichform.elements[i];
+				if (element.getAttribute("required") == 'required') {
+					if (!util.FormUtil.isFilled(element)) {
+						var info;
+						switch(element.name){
+							case "userName":
+							info="账号";
+							break;
+							case "password":
+							info="密码";
+							break;
+							default:
+							break;
+						}
+						alert("请输入" +info );
+						return false;
+					}
+				}
+			}
+			return true;
+		},
+		//检测输入是否为空
+		isFilled:function(field) {
+			return (field.value.length > 1 && field.value != field.placeholder);
 		}
 	},
 	//Ajax工具

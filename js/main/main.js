@@ -43,11 +43,15 @@
 						util.StyleUtil.hide(login);
 					};
 					util.EventUtil.addEvent(loginForm, "submit", submitHandle);
-					//点击登陆处理还拿书
+					//点击登陆处理函数
 					function submitHandle(event) {
 						event = util.EventUtil.getEvent(event);
 						util.EventUtil.preventDefault(event);
 						var target = util.EventUtil.getTarget(event);
+						//表单验证
+						if(!("required" in document.createElement("input"))){
+							util.FormUtil.validateForm(target);
+						}
 						var btn = target.elements[2];
 						btn.disabled = true;
 						var option = {};
@@ -62,6 +66,8 @@
 								util.StyleUtil.hide(login);
 								util.CookieUtil.set("loginSuc", true);
 								followBtnHandle(true);
+							}else{
+								alert("账号或密码错误，请重新输入！");
 							}
 						}
 					}
