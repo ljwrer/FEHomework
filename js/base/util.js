@@ -70,6 +70,8 @@ define([], function() {
 		removeClass: function(ele, cls) {
 			if (this.hasClass(ele, cls)) {
 				ele.className = ele.className.replace(new RegExp('(\\s|^)' + cls + '(\\s|$)'), " ");
+				//消除多余空格
+				ele.className=ele.className.replace(new RegExp('\\s{2,}','g')," ");
 			}
 		}
 	};
