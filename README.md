@@ -12,3 +12,4 @@ This is the homework of Front-End Web Developer Nanodegree on http://mooc.study.
  9. 工作环境相关的图片总宽度不够1920，且底色不为纯色，在高度固定且内容居中的要求下，高分辨率显示器两边会显示部分空白
  10. 排行榜滚动方式未指定，设为先向上滚动然后向下滚动
  11. 卡片生成函数使用innerHTML代码更为精简
+ 12. 排行榜获取的图片大小与设计稿不符，为避免图片变形，仅限定高度
