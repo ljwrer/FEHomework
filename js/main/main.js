@@ -257,7 +257,7 @@
 				countSpan.innerText = this.learnerCount;
 				var priceSpan = document.createElement("span");
 				priceSpan.className = "price"
-				priceSpan.innerText = this.price == 0 ? "免费" : "￥" + this.price;
+				priceSpan.innerHTML = this.price == 0 ? "免费" : "&yen;" + this.price;
 				countDiv.appendChild(sprite1);
 				countDiv.appendChild(countSpan);
 				this.cardDiv.appendChild(img);
