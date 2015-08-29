@@ -1,4 +1,3 @@
-(function(util) {
 	//关闭顶部通知条 
 	(function() {
 		var ghead = document.querySelector(".g-head");
@@ -513,4 +512,3 @@
 		}
 		setInterval(step, 5000);
 	})();
-})(util);

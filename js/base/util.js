@@ -7,9 +7,10 @@ if (!("innerText" in document.body)) {
 		this.textContent = s;
 	});
 }
-var util = {
+//定义工具库
+var util = (function(){
 	//通用工具
-	GennerUtil: {
+	var GennerUtil = {
 		//将连字符格式转换为驼峰格式
 		repalceChar: function(str, char) {
 			var i;
@@ -18,9 +19,9 @@ var util = {
 			}
 			return str;
 		},
-	},
+	};
 	//cookie工具 
-	CookieUtil: {
+	var CookieUtil = {
 		//获取cookie
 		get: function(name) {
 			if (!document.cookie) return null;
@@ -55,9 +56,9 @@ var util = {
 			}
 			document.cookie = CookieText;
 		}
-	},
+	};
 	//DOM工具
-	DomUtil: {
+	var DomUtil = {
 		//查询是否用有指定class
 		hasClass: function(ele, cls) {
 			return (new RegExp('(\\s|^)' + cls + '(\\s|$)')).test(ele.className);
@@ -70,11 +71,13 @@ var util = {
 		removeClass: function(ele, cls) {
 			if (this.hasClass(ele, cls)) {
 				ele.className = ele.className.replace(new RegExp('(\\s|^)' + cls + '(\\s|$)'), " ");
+				//消除多余空格
+				ele.className=ele.className.replace(new RegExp('\\s{2,}')," ");
 			}
 		}
-	},
+	};
 	//事件处理工具
-	EventUtil: {
+	var EventUtil = {
 		//绑定事件
 		addEvent: document.addEventListener ? function(elem, type, listener, useCapture) {
 			elem.addEventListener(type, listener, useCapture);
@@ -103,18 +106,18 @@ var util = {
 		getTarget: function(event) {
 			return event.target || event.srcElement;
 		}
-	},
+	};
 	//样式工具
-	StyleUtil: {
+	var StyleUtil = {
 		//隐藏
 		hide: function(ele) {
-			util.DomUtil.removeClass(ele, "j-show");
-			util.DomUtil.addClass(ele, "j-hide");
+			DomUtil.removeClass(ele, "j-show");
+			DomUtil.addClass(ele, "j-hide");
 		},
 		//显示
 		show: function(ele) {
-			util.DomUtil.removeClass(ele, "j-hide");
-			util.DomUtil.addClass(ele, "j-show");
+			DomUtil.removeClass(ele, "j-hide");
+			DomUtil.addClass(ele, "j-show");
 		},
 		//获取样式对象
 		getStyle: function(ele) {
@@ -127,13 +130,13 @@ var util = {
 		//获取样式属性
 		get: function(ele, prop) {
 			var dec = this.getStyle(ele);
-			prop = util.GennerUtil.repalceChar(prop, "-");
+			prop = GennerUtil.repalceChar(prop, "-");
 			var result = dec[prop];
 			return result;
 		}
-	},
+	};
 	//表单工具
-	FormUtil: {
+	var FormUtil = {
 		//兼容placeholder
 		resetFields: function(whichform) {
 			if ('placeholder' in document.createElement('input')) return;
@@ -157,23 +160,23 @@ var util = {
 			}
 		},
 		//兼容required
-		validateForm:function(whichform) {
+		validateForm: function(whichform) {
 			for (var i = 0; i < whichform.elements.length; i++) {
 				var element = whichform.elements[i];
 				if (element.getAttribute("required") == 'required') {
 					if (!this.isFilled(element)) {
 						var info;
-						switch(element.name){
+						switch (element.name) {
 							case "userName":
-							info="账号";
-							break;
+								info = "账号";
+								break;
 							case "password":
-							info="密码";
-							break;
+								info = "密码";
+								break;
 							default:
-							break;
+								break;
 						}
-						alert("请输入" +info );
+						alert("请输入" + info);
 						return false;
 					}
 				}
@@ -181,12 +184,12 @@ var util = {
 			return true;
 		},
 		//检测输入是否为空
-		isFilled:function(field) {
+		isFilled: function(field) {
 			return (field.value.length > 0 && field.value != field.placeholder);
 		}
-	},
+	};
 	//Ajax工具
-	AjaxUtil: {
+	var AjaxUtil = {
 		//兼容获取xhr
 		getHTTPObject: function() {
 			if (typeof XMLHttpRequest === undefined) {
@@ -229,9 +232,9 @@ var util = {
 			};
 			xhr.send(null);
 		}
-	},
+	};
 	//动画工具
-	MoveUtil: {
+	var MoveUtil = {
 		//移动
 		moveElement: function(ele, finalX, finalY, intervel) {
 			finalX = parseInt(finalX);
@@ -241,8 +244,8 @@ var util = {
 			}
 
 			function step() {
-				var currentX = parseInt(util.StyleUtil.get(ele, "left"));
-				var currentY = parseInt(util.StyleUtil.get(ele, "top"));
+				var currentX = parseInt(StyleUtil.get(ele, "left"));
+				var currentY = parseInt(StyleUtil.get(ele, "top"));
 				var dist = 0
 				if (currentX == finalX && currentY == finalY) {
 					clearInterval(intervelID);
@@ -267,9 +270,9 @@ var util = {
 			var intervelID = setInterval(step, intervel);
 			ele.interverID = intervelID;
 		}
-	},
+	};
 	//数组工具
-	ArrayUtil: {
+	var ArrayUtil = {
 		//搜索数组并返回下标
 		search: function(arr, item) {
 			var ret = -1;
@@ -282,4 +285,15 @@ var util = {
 			return ret;
 		}
 	}
-}
+	return {
+		GennerUtil: GennerUtil,
+		CookieUtil: CookieUtil,
+		DomUtil: DomUtil,
+		EventUtil: EventUtil,
+		StyleUtil: StyleUtil,
+		FormUtil: FormUtil,
+		AjaxUtil: AjaxUtil,
+		MoveUtil: MoveUtil,
+		ArrayUtil: ArrayUtil
+	};
+})();
