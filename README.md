@@ -13,3 +13,4 @@ This is the homework of Front-End Web Developer Nanodegree on http://mooc.study.
  10. 排行榜滚动方式未指定，设为先向上滚动然后向下滚动
  11. 卡片生成函数使用innerHTML代码更为精简
  12. 为满足课程需求，最后去除了RequireJS
+ 13. 排行榜获取的图片大小与设计稿不符，为避免图片变形，仅限定高度
