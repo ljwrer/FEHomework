@@ -1,6 +1,14 @@
 # FrontEndWebDeveloperNanodegreeHomework
 This is the homework of Front-End Web Developer Nanodegree on http://mooc.study.163.com/smartSpec/detail/12001.htm
-# issue
+##DEMO
+http://ljwrer.github.io/FrontEndWebDeveloperNanodegreeHomework
+##要求
+ - 兼容IE8+
+ - 使用原生JavaScript
+ - 宽屏窄屏自适应布局
+ - 使用Ajax刷新页面
+
+## issue
  1. 卡片内容只有前4页为真实数据
  2. Ajax获取的分类信息为null
  3. 默认备选文字为微软雅黑
